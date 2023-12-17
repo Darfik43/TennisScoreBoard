@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PlayerDao {
 
-    public void addPlayer(Player player) {
+    public void savePlayer(Player player) {
         Transaction transaction;
         DatabaseHandler dbHandler = new DatabaseHandler();
         try (Session session = dbHandler.getSessionFactory().openSession()) {
@@ -31,6 +31,14 @@ public class PlayerDao {
             return players.get(0);
 
             // NullPointerException
+        }
+    }
+
+    public boolean isPlayerExisting(Player player) {
+        if (getPlayer(player.toString()) != null) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
