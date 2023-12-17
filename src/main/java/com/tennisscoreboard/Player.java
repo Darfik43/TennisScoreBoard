@@ -1,10 +1,13 @@
-package com;
+package com.tennisscoreboard;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "players")
@@ -15,9 +18,8 @@ import lombok.NoArgsConstructor;
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "playerId")
-    @OneToOne(mappedBy = "players")
     private int id;
 
     @Column(name = "name")

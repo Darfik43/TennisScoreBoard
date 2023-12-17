@@ -1,4 +1,4 @@
-package com;
+package com.tennisscoreboard;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -24,8 +24,8 @@ public class MatchDao {
         }
     }
 
-    public Match getAllMatches() {
-       //TODO
-    }
+//    public Match getAllMatches() {
+//       //TODO
+//    }
 
 }

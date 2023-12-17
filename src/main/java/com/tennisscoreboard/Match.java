@@ -1,4 +1,4 @@
-package com;
+package com.tennisscoreboard;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

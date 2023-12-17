@@ -1,5 +1,4 @@
-package com;
-import org.glassfish.jaxb.core.v2.TODO;
+package com.tennisscoreboard;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

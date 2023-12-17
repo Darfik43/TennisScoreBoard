@@ -1,4 +1,4 @@
-package com;
+package com.tennisscoreboard;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
