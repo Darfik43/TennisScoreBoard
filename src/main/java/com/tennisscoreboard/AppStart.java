@@ -41,7 +41,7 @@ public class AppStart {
 //        }
 //    }
 
-    public static void main(String[] args) {
+    public void startApp() {
         DatabaseHandler dbHandler = new DatabaseHandler();
         try (Session session = dbHandler.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -52,22 +52,22 @@ public class AppStart {
             Player player1 = new Player();
             player1.setName("J.Wick");
             Player player2 = new Player();
-            player1.setName("B.Gates");
-            Player player3 = new Player();
-            player1.setName("D.Walt");
-            Player player4 = new Player();
-            player1.setName("P.Armel");
-            Player player5 = new Player();
-            player1.setName("S.Black");
-            Player player6 = new Player();
-            player1.setName("A.Adams");
+            player2.setName("B.Gates");
+//            Player player3 = new Player();
+//            player1.setName("D.Walt");
+//            Player player4 = new Player();
+//            player1.setName("P.Armel");
+//            Player player5 = new Player();
+//            player1.setName("S.Black");
+//            Player player6 = new Player();
+//            player1.setName("A.Adams");
 
             playerDao.savePlayer(player1);
             playerDao.savePlayer(player2);
-            playerDao.savePlayer(player3);
-            playerDao.savePlayer(player4);
-            playerDao.savePlayer(player5);
-            playerDao.savePlayer(player6);
+//            playerDao.savePlayer(player3);
+//            playerDao.savePlayer(player4);
+//            playerDao.savePlayer(player5);
+//            playerDao.savePlayer(player6);
 
             Match m1 = new Match();
             m1.setId(1);
@@ -76,6 +76,11 @@ public class AppStart {
             m1.setWinner(player1);
 
             transaction.commit();
+
+            System.out.println("_______________");
+            System.out.println("Player1's name " + player1.getName());
+            System.out.println("Player2's name " + player2.getName());
+            System.out.println("_______________");
         }
     }
 }
