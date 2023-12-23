@@ -1,7 +1,6 @@
 package com.tennisscoreboard;
 
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,10 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "startPage", value = "/start")
-public class startServlet extends HttpServlet {
+public class StartServlet extends HttpServlet {
         AppStart appStart = new AppStart();
     @Override
     public void init() throws ServletException {
