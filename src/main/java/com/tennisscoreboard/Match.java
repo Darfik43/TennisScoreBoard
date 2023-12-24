@@ -20,14 +20,14 @@ public class Match {
     private int id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "playerOne_id", referencedColumnName = "PlayerId")
+    @JoinColumn(name = "playerOne_id", referencedColumnName = "playerId")
     private Player playerOne;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "playerTwo_id", referencedColumnName = "PlayerId")
+    @JoinColumn(name = "playerTwo_id", referencedColumnName = "playerId")
     private Player playerTwo;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "winnerId", referencedColumnName = "PlayerId")
+    @JoinColumn(name = "winnerId", referencedColumnName = "playerId")
     private Player winner;
 }

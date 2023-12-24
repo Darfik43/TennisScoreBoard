@@ -11,6 +11,7 @@
     <title>Scoreboard</title>
 </head>
 <body>
-    <h1>Redirected</h1>
+    <h1>Scoreboard</h1>
+    <p></p>
 </body>
 </html>

@@ -11,6 +11,17 @@
     <title>New match</title>
 </head>
 <body>
-
+    <h1>Create new match</h1>
+    <form action = "${pageContext.request.contextPath}/new-match" method = "post">
+        <p>
+            <%= "Enter a name for the first player:" %>
+            <input name = "playerOneName"/>
+        </p>
+        <p>
+            <%= "Enter a name for the second player:" %>
+            <input name = "playerTwoName">
+        </p>
+        <button>Submit</button>
+    </form>
 </body>
 </html>

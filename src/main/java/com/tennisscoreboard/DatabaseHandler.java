@@ -1,20 +1,25 @@
 package com.tennisscoreboard;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 public class DatabaseHandler {
-    private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    public SessionFactory getSessionFactory() {
-
+    public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            try {
+                Configuration configuration = new Configuration().configure();
+                configuration.addAnnotatedClass(Player.class);
+                configuration.addAnnotatedClass(Match.class);
+                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+                sessionFactory = configuration.buildSessionFactory(builder.build());
+
+            } catch (Exception e) {
+                System.out.println("Исключение!" + e);
+            }
         }
         return sessionFactory;
-    }
-
-    public void shutdown() {
-        sessionFactory.close();
     }
 }
