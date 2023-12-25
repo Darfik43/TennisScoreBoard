@@ -10,13 +10,13 @@ import org.hibernate.Transaction;
 
 public class AppStart implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
 
-    @Override
-    public void contextInitialized(ServletContextEvent sce) {
-        MatchDao matchDao = new MatchDao();
-        final ServletContext servletContext = sce.getServletContext();
-        servletContext.setAttribute("matchDao", matchDao);
-        startApp();
-    }
+//    @Override
+//    public void contextInitialized(ServletContextEvent sce) {
+//        MatchDao matchDao = new MatchDao();
+//        final ServletContext servletContext = sce.getServletContext();
+//        servletContext.setAttribute("matchDao", matchDao);
+//        startApp();
+//    }
 
     public void startApp()  {
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
@@ -36,8 +36,13 @@ public class AppStart implements ServletContextListener, HttpSessionListener, Ht
             playerDao.savePlayer(player2);
             System.out.println(playerDao.getPlayer("B.Gates"));
 
+            Match m1 = new Match();
 
-
+            m1.setPlayerOne(player1);
+            m1.setPlayerTwo(player2);
+            m1.setWinner(player1);
+            matchDao.saveMatch(m1);
+            System.out.println(matchDao.getAllMatches());
 
             transaction.commit();
 

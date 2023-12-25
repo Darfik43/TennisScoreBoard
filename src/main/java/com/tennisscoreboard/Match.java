@@ -16,18 +16,18 @@ public class Match {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "matchId", nullable = false, unique = true)
+//    @Column(name = "matchId", nullable = false, unique = true)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "playerOne_id", referencedColumnName = "playerId")
+    @ManyToOne//(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "playerOne_id", referencedColumnName = "playerId")
     private Player playerOne;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "playerTwo_id", referencedColumnName = "playerId")
+    @ManyToOne//(cascade = CascadeType.ALL)
+    //JoinColumn(name = "playerTwo_id", referencedColumnName = "playerId")
     private Player playerTwo;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "winnerId", referencedColumnName = "playerId")
+    @ManyToOne//(cascade = CascadeType.ALL)
+   //@JoinColumn(name = "winnerId", referencedColumnName = "playerId")
     private Player winner;
 }

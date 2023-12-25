@@ -1,5 +1,9 @@
 package com.tennisscoreboard;
 
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -12,36 +16,28 @@ public class MatchDao {
     private static final String ALL_MATCHES = "FROM matches";
 
     public void saveMatch(Match match) {
-        DatabaseHandler dbHandler = new DatabaseHandler();
         Transaction transaction;
-        PlayerDao playerDao = new PlayerDao();
-        try (Session session = dbHandler.getSessionFactory().openSession()) {
+        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-//            if (match.getPlayerOne().getId() == 0) {
-                playerDao.savePlayer(match.getPlayerOne());
-//            }
-//            if (match.getPlayerTwo().getId() == 0) {
-                playerDao.savePlayer(match.getPlayerTwo());
-//            }
-            match.getPlayerOne().setId(playerDao.getPlayer(match.getPlayerOne().toString()).getId());
-            match.getPlayerTwo().setId(playerDao.getPlayer(match.getPlayerTwo().toString()).getId());
-
+            session.persist(match);
             transaction.commit();
         }
     }
 
     public List<Match> getAllMatches() {
         Transaction transaction;
-        DatabaseHandler dbHandler = new DatabaseHandler();
-        List<Match> allMatches = null;
-        try (Session session = dbHandler.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            Query<Match> query = session.createQuery("FROM matches", Match.class);
-            allMatches = query.getResultList();
-            transaction.commit();
+        List<Match> matches = null;
+        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery cq = cb.createQuery(Match.class);
+            Root rootEntry = cq.from(Match.class);
+            CriteriaQuery all = cq.select(rootEntry);
+            TypedQuery allQuery = session.createQuery(all);
+            matches = (List<Match>) allQuery.getResultList();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return allMatches;
+        return matches;
     }
 }

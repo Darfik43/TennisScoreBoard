@@ -8,7 +8,7 @@ import java.util.List;
 public class PlayerDao {
 
     public void savePlayer(Player player) {
-        Transaction transaction = null;
+        Transaction transaction;
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.persist(player);
