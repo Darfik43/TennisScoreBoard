@@ -1,7 +1,5 @@
 package com.tennisscoreboard;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.http.HttpSessionAttributeListener;
 import jakarta.servlet.http.HttpSessionListener;
