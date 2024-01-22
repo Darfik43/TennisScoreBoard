@@ -1,4 +1,4 @@
-package com.tennisscoreboard;
+package com.tennisscoreboard.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

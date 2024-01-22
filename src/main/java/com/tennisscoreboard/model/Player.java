@@ -1,4 +1,4 @@
-package com.tennisscoreboard;
+package com.tennisscoreboard.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

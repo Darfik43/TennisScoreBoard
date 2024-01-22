@@ -1,5 +1,9 @@
 package com.tennisscoreboard;
 
+import com.tennisscoreboard.model.Match;
+import com.tennisscoreboard.model.Player;
+import com.tennisscoreboard.service.dao.MatchDao;
+import com.tennisscoreboard.service.dao.PlayerDao;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.http.HttpSessionAttributeListener;
 import jakarta.servlet.http.HttpSessionListener;
@@ -29,18 +33,18 @@ public class AppStart implements ServletContextListener, HttpSessionListener, Ht
             player2.setName("B.Gates");
 
 
-            playerDao.savePlayer(player1);
-            System.out.println(playerDao.getPlayer("J.Wick"));
-            playerDao.savePlayer(player2);
-            System.out.println(playerDao.getPlayer("B.Gates"));
+            playerDao.createPlayer(player1);
+            System.out.println(playerDao.getPlayerByName("J.Wick"));
+            playerDao.createPlayer(player2);
+            System.out.println(playerDao.getPlayerByName("B.Gates"));
 
             Match m1 = new Match();
 
             m1.setPlayerOne(player1);
             m1.setPlayerTwo(player2);
             m1.setWinner(player1);
-            matchDao.saveMatch(m1);
-            System.out.println(matchDao.getAllMatches());
+            matchDao.createMatch(m1);
+            System.out.println(matchDao.getMatchById(1));
 
             transaction.commit();
 

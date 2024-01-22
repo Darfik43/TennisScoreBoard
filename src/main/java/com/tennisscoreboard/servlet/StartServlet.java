@@ -1,5 +1,6 @@
-package com.tennisscoreboard;
+package com.tennisscoreboard.servlet;
 
+import com.tennisscoreboard.AppStart;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

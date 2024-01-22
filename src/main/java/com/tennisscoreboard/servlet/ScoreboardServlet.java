@@ -1,6 +1,7 @@
-package com.tennisscoreboard;
+package com.tennisscoreboard.servlet;
 
-import jakarta.servlet.RequestDispatcher;
+import com.tennisscoreboard.service.dao.MatchDao;
+import com.tennisscoreboard.model.Match;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,11 +17,11 @@ public class ScoreboardServlet extends HttpServlet {
     MatchDao matchDao = new MatchDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Match> allMatches = matchDao.getAllMatches();
-        PrintWriter pw = resp.getWriter();
-        for (int i = 0; i < allMatches.size(); i++) {
-            pw.println(i);
-        }
-        //req.getRequestDispatcher("scoreboard.jsp").forward(req, resp);
+//        List<Match> allMatches = matchDao.getAllMatches();
+//        PrintWriter pw = resp.getWriter();
+//        for (int i = 0; i < allMatches.size(); i++) {
+//            pw.println(i);
+//        }
+//        //req.getRequestDispatcher("scoreboard.jsp").forward(req, resp);
     }
 }

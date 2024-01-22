@@ -1,6 +1,6 @@
-package com.tennisscoreboard.services.matchscore;
+package com.tennisscoreboard.service.scorecalculation;
 
-import com.tennisscoreboard.Player;
+import com.tennisscoreboard.model.Player;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -32,9 +32,9 @@ public class GameScore {
         //TODO main logic of scoring
     }
 
-    public boolean isTieBreak() {
-
-    }
+//    public boolean isTieBreak() {
+//
+//    }
 
     public int getCurrentPts(Player player) {
         return gameScore.get(player.getName()).ordinal();

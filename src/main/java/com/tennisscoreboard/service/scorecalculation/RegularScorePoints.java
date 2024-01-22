@@ -1,8 +1,4 @@
-package com.tennisscoreboard.services.matchscore;
-
-import com.tennisscoreboard.Player;
-
-import java.util.EnumMap;
+package com.tennisscoreboard.service.scorecalculation;
 
 public enum RegularScorePoints {
     LOVE, FIRST, SECOND, THIRD, AD;
