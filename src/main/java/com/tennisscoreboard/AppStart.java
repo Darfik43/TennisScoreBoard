@@ -24,8 +24,8 @@ public class AppStart implements ServletContextListener, HttpSessionListener, Ht
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            MatchDao matchDao = new MatchDao();
-            PlayerDao playerDao = new PlayerDao();
+            MatchDao matchDao = new MatchDao(session);
+            PlayerDao playerDao = new PlayerDao(session);
 
             Player player1 = new Player();
             player1.setName("J.Wick");

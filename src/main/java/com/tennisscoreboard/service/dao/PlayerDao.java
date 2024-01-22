@@ -7,7 +7,11 @@ import org.hibernate.query.Query;
 
 public class PlayerDao implements PlayerDaoInterface {
 
+    private final Session session;
 
+    public PlayerDao(Session session) {
+        this.session = session;
+    }
     @Override
     public Player getPlayerById(int id) {
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {

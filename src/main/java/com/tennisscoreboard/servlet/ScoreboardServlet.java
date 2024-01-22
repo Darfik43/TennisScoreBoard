@@ -14,7 +14,7 @@ import java.util.List;
 
 @WebServlet(name = "scoreboard", value = "/scoreboard")
 public class ScoreboardServlet extends HttpServlet {
-    MatchDao matchDao = new MatchDao();
+    //MatchDao matchDao = new MatchDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        List<Match> allMatches = matchDao.getAllMatches();

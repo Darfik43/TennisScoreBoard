@@ -13,10 +13,16 @@ import java.util.List;
 
 public class MatchDao implements MatchDaoInterface {
 
+    private final Session session;
+
+    public MatchDao(Session session) {
+        this.session = session;
+    }
+
 
     @Override
     public Match getMatchById(int id) {
-        return null;
+        return session.get(Match.class, id);
     }
 
     @Override
