@@ -1,17 +1,14 @@
 package com.tennisscoreboard.service.currentmatch;
 
 import com.tennisscoreboard.model.Match;
+import com.tennisscoreboard.model.Player;
 import com.tennisscoreboard.service.dao.MatchDao;
-import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CurrentMatchServiceImpl implements CurrentMatchService {
 
-    private final Map<Integer, Match> currentMatches = new HashMap<>();
+    private final Map<UUID, Match> currentMatches = new HashMap<>();
     private final MatchDao matchDao;
 
     public CurrentMatchServiceImpl(MatchDao matchDao) {
@@ -19,12 +16,14 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
     }
 
     @Override
-    public void addMatch(Match match) {
-        currentMatches.put(match.getId(), match);
+    public void startNewMatch(Player player1, Player player2) {
+        Match match = new Match(player1, player2);
+        UUID matchId = UUID.randomUUID();
+        currentMatches.put(matchId, match);
     }
 
     @Override
-    public void removeMatch(int matchId) {
+    public void removeMatch(UUID matchId) {
         currentMatches.remove(matchId);
     }
 

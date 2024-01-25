@@ -18,7 +18,7 @@ public class Player {
     @Id
     @GeneratedValue
     @Column(name = "playerId")
-    private int id;
+    private long id;
 
     @Column(name = "name")
     private String name;

@@ -31,6 +31,9 @@ public class MatchDao implements MatchDaoInterface {
             session.beginTransaction();
             session.persist(match);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            //TODO
         }
     }
 

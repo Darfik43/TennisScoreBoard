@@ -1,6 +1,7 @@
 package com.tennisscoreboard.model;
 
 import com.tennisscoreboard.model.Player;
+import com.tennisscoreboard.service.scorecalculation.Score;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,21 +15,26 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Match {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "matchId", nullable = false, unique = true)
-    private int id;
+        @ManyToOne
+        @JoinColumn(name = "Player1", nullable = false)
+        private Player player1;
 
-    @ManyToOne//(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "playerOne_id", referencedColumnName = "playerId")
-    private Player playerOne;
+        @ManyToOne
+        @JoinColumn(name = "Player2", nullable = false)
+        private Player player2;
 
-    @ManyToOne//(cascade = CascadeType.ALL)
-    //JoinColumn(name = "playerTwo_id", referencedColumnName = "playerId")
-    private Player playerTwo;
+        @ManyToOne
+        @JoinColumn(name = "Winner", nullable = false)
+        private Player winner;
 
-    @ManyToOne//(cascade = CascadeType.ALL)
-   //@JoinColumn(name = "winnerId", referencedColumnName = "playerId")
-    private Player winner;
-}
+        public Match(Player player1, Player player2) {
+                this.player1 = player1;
+                this.player2 = player2;
+        }
+    }
+
+
