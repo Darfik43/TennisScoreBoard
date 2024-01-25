@@ -1,6 +1,8 @@
 package com.tennisscoreboard.service.currentmatch;
 
 import com.tennisscoreboard.model.Match;
+import com.tennisscoreboard.service.dao.MatchDao;
+import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +12,11 @@ import java.util.Map;
 public class CurrentMatchServiceImpl implements CurrentMatchService {
 
     private final Map<Integer, Match> currentMatches = new HashMap<>();
+    private final MatchDao matchDao;
+
+    public CurrentMatchServiceImpl(MatchDao matchDao) {
+        this.matchDao = matchDao;
+    }
 
     @Override
     public void addMatch(Match match) {
@@ -25,4 +32,10 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
     public List<Match> getAllCurrentMatches() {
         return new ArrayList<>(currentMatches.values());
     }
+
+    @Override
+    public void saveFinishedMatch(Match match) {
+        matchDao.createMatch(match);
+    }
 }
+

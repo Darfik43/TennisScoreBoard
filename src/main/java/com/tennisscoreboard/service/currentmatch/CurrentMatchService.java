@@ -8,4 +8,6 @@ public interface CurrentMatchService {
     void addMatch(Match match);
     void removeMatch(int matchId);
     List<Match> getAllCurrentMatches();
+
+    void saveFinishedMatch(Match match);
 }
