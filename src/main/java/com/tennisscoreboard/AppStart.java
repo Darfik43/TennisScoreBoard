@@ -40,8 +40,8 @@ public class AppStart implements ServletContextListener, HttpSessionListener, Ht
 
             Match m1 = new Match();
 
-            m1.setPlayerOne(player1);
-            m1.setPlayerTwo(player2);
+            m1.setPlayer1(player1);
+            m1.setPlayer2(player2);
             m1.setWinner(player1);
             matchDao.createMatch(m1);
             System.out.println(matchDao.getMatchById(1));

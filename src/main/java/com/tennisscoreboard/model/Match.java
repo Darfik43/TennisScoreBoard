@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "matches")
 @Data
@@ -17,18 +19,18 @@ import lombok.NoArgsConstructor;
 public class Match {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+        private UUID id;
 
         @ManyToOne
-        @JoinColumn(name = "Player1", nullable = false)
+        @JoinColumn(name = "player1_id", nullable = false)
         private Player player1;
 
         @ManyToOne
-        @JoinColumn(name = "Player2", nullable = false)
+        @JoinColumn(name = "player2_id", nullable = false)
         private Player player2;
 
         @ManyToOne
-        @JoinColumn(name = "Winner", nullable = false)
+        @JoinColumn(name = "winner_id", nullable = false)
         private Player winner;
 
         public Match(Player player1, Player player2) {

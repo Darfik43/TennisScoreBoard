@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 
 @Entity
 @Table(name = "players")
@@ -17,8 +19,7 @@ public class Player {
 
     @Id
     @GeneratedValue
-    @Column(name = "playerId")
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;

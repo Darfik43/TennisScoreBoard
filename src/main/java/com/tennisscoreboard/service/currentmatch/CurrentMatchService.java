@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface CurrentMatchService {
     void startNewMatch(Player player1, Player player2);
 
-    void removeMatch(UUID matchId);
+    void endMatch(UUID matchId);
 
     List<Match> getAllCurrentMatches();
 

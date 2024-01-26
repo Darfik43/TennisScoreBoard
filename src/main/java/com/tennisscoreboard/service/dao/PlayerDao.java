@@ -13,7 +13,7 @@ public class PlayerDao implements PlayerDaoInterface {
         this.session = session;
     }
     @Override
-    public Player getPlayerById(int id) {
+    public Player getPlayerById(Long id) {
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
             return session.get(Player.class, id);
         }

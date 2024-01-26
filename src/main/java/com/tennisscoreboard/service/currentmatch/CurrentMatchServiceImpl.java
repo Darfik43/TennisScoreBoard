@@ -3,6 +3,7 @@ package com.tennisscoreboard.service.currentmatch;
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
 import com.tennisscoreboard.service.dao.MatchDao;
+import com.tennisscoreboard.service.scorecalculation.Score;
 
 import java.util.*;
 
@@ -20,10 +21,11 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
         Match match = new Match(player1, player2);
         UUID matchId = UUID.randomUUID();
         currentMatches.put(matchId, match);
+        Score score = new Score(match);
     }
 
     @Override
-    public void removeMatch(UUID matchId) {
+    public void endMatch(UUID matchId) {
         currentMatches.remove(matchId);
     }
 
