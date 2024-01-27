@@ -1,44 +1,79 @@
 package com.tennisscoreboard.service.scorecalculation;
 
-import com.tennisscoreboard.model.Player;
-
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class GameScore {
-    private final Map<String, RegularScorePoints> gameScore = new ConcurrentHashMap<>();
-    private static final EnumMap<RegularScorePoints, String> ptsEnum = new EnumMap<>(RegularScorePoints.class);
+    private final Map<String, TennisPoint> gameScore;
+    private final String player1Name;
+    private final String player2Name;
 
-    static {
-        ptsEnum.put(RegularScorePoints.LOVE, "0");
-        ptsEnum.put(RegularScorePoints.FIRST, "15");
-        ptsEnum.put(RegularScorePoints.SECOND, "30");
-        ptsEnum.put(RegularScorePoints.THIRD, "40");
-        ptsEnum.put(RegularScorePoints.AD, "AD");
-    }
-    RegularScorePoints rsp = RegularScorePoints.LOVE;
-    public GameScore(Player playerOne, Player playerTwo) {
-        gameScore.put(playerOne.getName(), getStartPoints());
+    protected GameScore(String player1Name, String player2Name) {
+        this.player1Name = player1Name;
+        this.player2Name = player2Name;
+        this.gameScore = new HashMap<>();
     }
 
-
-    public RegularScorePoints getStartPoints() {
-        return RegularScorePoints.LOVE;
+    public void initializeGameScore() {
+        gameScore.put(player1Name, TennisPoint.LOVE);
+        gameScore.put(player2Name, TennisPoint.LOVE);
     }
 
-    public void upPoints(Player player) {
-        gameScore.put(player.getName(), RegularScorePoints.values()[getCurrentPts(player) + 1]);
-        //TODO main logic of scoring
+    public void player1WinsPoint() {
+        updateGameScore(player1Name);
     }
 
-//    public boolean isTieBreak() {
-//
-//    }
+    public void player2WinsPoint() {
+        updateGameScore(player2Name);
+    }
 
-    public int getCurrentPts(Player player) {
-        return gameScore.get(player.getName()).ordinal();
+    private void updateGameScore(String playerName) {
+        TennisPoint currentScore = gameScore.get(playerName);
+
+        if (currentScore == TennisPoint.LOVE) {
+            gameScore.put(playerName, TennisPoint.FIFTEEN);
+        } else if (currentScore == TennisPoint.FIFTEEN) {
+            gameScore.put(playerName, TennisPoint.THIRTY);
+        } else if (currentScore == TennisPoint.THIRTY) {
+            gameScore.put(playerName, TennisPoint.FORTY);
+        } else if (currentScore == TennisPoint.FORTY) {
+            handleAdvantage(playerName);
+        }
+    }
+
+    private void handleAdvantage(String playerName) {
+        TennisPoint opponentScore = gameScore.get(getOpponentName(playerName));
+
+        if (opponentScore == TennisPoint.FORTY) {
+            gameScore.put(playerName, TennisPoint.FORTY);
+            gameScore.put(getOpponentName(playerName), TennisPoint.FORTY);
+        } else if (opponentScore == TennisPoint.ADVANTAGE) {
+            gameScore.put(playerName, TennisPoint.FORTY);
+            gameScore.put(getOpponentName(playerName), TennisPoint.FORTY);
+        } else {
+            gameScore.put(playerName, TennisPoint.LOVE);
+            gameScore.put(getOpponentName(playerName), TennisPoint.LOVE);
+        }
+    }
+
+    private String getOpponentName(String playerName) {
+        return playerName.equals(player1Name) ? player2Name : player1Name;
+    }
+
+    public Map<String, TennisPoint> getGameScore() {
+        return new HashMap<>(gameScore);
+    }
+
+    public boolean isGameFinished() {
+        TennisPoint player1GameScore = gameScore.get(player1Name);
+        TennisPoint player2GameScore = gameScore.get(player2Name);
+
+        return (player1GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player2GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
+                (player2GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player1GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
+                (player1GameScore == TennisPoint.ADVANTAGE || player2GameScore == TennisPoint.ADVANTAGE);
     }
 }
+
+
 
 

@@ -4,29 +4,43 @@ import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Score {
-    private HashMap<String, Integer> matchScore;
+    private final SetScore setScore;
+    private final Map<String, Integer> matchScore;
     private Match match;
+
     private final String player1Name;
     private final String player2Name;
 
     public Score(Match match) {
-        SetScore setScore = new SetScore();
+        this.matchScore = new HashMap<>();
         this.player1Name = match.getPlayer1().getName();
         this.player2Name = match.getPlayer2().getName();
+        this.setScore = new SetScore(player1Name, player2Name);
     }
 
-    public void createMatchScore() {
-        matchScore.put(match.getPlayer1().getName(), 0);
-        matchScore.put(match.getPlayer2().getName(), 0);
+    public void initializeMatchScore() {
+        matchScore.put(player1Name, 0);
+        matchScore.put(player2Name, 0);
+        setScore.initializeSetScore();
     }
+
     public void player1WinsPoint() {
-        matchScore.put(player1Name, matchScore.get(player1Name + 1));
+        updateMatchScore(player1Name);
     }
 
     public void player2WinsPoint() {
-        matchScore.put(player2Name, matchScore.get(player2Name + 1));
+        updateMatchScore(player2Name);
+    }
+
+    private void updateMatchScore(String playerName) {
+        matchScore.put(playerName, matchScore.get(playerName) + 1);
+    }
+
+    public Map<String, Integer> getMatchScore() {
+        return new HashMap<>(matchScore);
     }
 
     public boolean isMatchFinished() {
