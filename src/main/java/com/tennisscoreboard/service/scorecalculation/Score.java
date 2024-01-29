@@ -51,7 +51,7 @@ public class Score implements ScoreCounter {
     }
 
     public void updateScore(String playerName) {
-        if (setScore.isFinished()) {
+        if (!isFinished && setScore.isFinished()) {
             matchScore.put(playerName, matchScore.get(playerName) + 1);
             updateFinishedStatus();
         }

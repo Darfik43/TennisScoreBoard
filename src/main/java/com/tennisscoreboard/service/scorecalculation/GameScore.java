@@ -51,16 +51,18 @@ public class GameScore implements ScoreCounter {
     }
 
     public void updateScore(String playerName) {
-        TennisPoint currentScore = gameScore.get(playerName);
+        if (!isFinished) {
+            TennisPoint currentScore = gameScore.get(playerName);
 
-        if (currentScore == TennisPoint.LOVE) {
-            gameScore.put(playerName, TennisPoint.FIFTEEN);
-        } else if (currentScore == TennisPoint.FIFTEEN) {
-            gameScore.put(playerName, TennisPoint.THIRTY);
-        } else if (currentScore == TennisPoint.THIRTY) {
-            gameScore.put(playerName, TennisPoint.FORTY);
-        } else if (currentScore == TennisPoint.FORTY) {
-            handleAdvantage(playerName);
+            if (currentScore == TennisPoint.LOVE) {
+                gameScore.put(playerName, TennisPoint.FIFTEEN);
+            } else if (currentScore == TennisPoint.FIFTEEN) {
+                gameScore.put(playerName, TennisPoint.THIRTY);
+            } else if (currentScore == TennisPoint.THIRTY) {
+                gameScore.put(playerName, TennisPoint.FORTY);
+            } else if (currentScore == TennisPoint.FORTY) {
+                handleAdvantage(playerName);
+            }
         }
     }
 
