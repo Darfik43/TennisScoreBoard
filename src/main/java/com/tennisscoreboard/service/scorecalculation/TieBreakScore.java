@@ -3,33 +3,47 @@ package com.tennisscoreboard.service.scorecalculation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TieBreakScore {
+public class TieBreakScore implements ScoreCounter {
     private final Map<String, Integer> tieBreakScore;
     private final String player1Name;
     private final String player2Name;
+    private boolean isFinished;
 
     public TieBreakScore(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.tieBreakScore = new HashMap<>();
+        this.isFinished = false;
     }
 
-    public void initializeTieBreakScore() {
+
+
+    @Override
+    public void initialize() {
         tieBreakScore.put(player1Name, 0);
         tieBreakScore.put(player2Name, 0);
+        isFinished = false;
     }
 
     public void player1WinsPoint() {
-        tieBreakScore.put(player1Name, tieBreakScore.get(player1Name) + 1);
+        updateScore(player1Name);
     }
 
     public void player2WinsPoint() {
-        tieBreakScore.put(player2Name, tieBreakScore.get(player2Name) + 1);
+        updateScore(player2Name);
     }
 
-    private void updateTieBreakScore(String winningPlayer) {
-        tieBreakScore.put(winningPlayer, tieBreakScore.get(winningPlayer) + 1);
+    @Override
+    public boolean isFinished() {
+        return (Math.abs(tieBreakScore.get(player1Name) - tieBreakScore.get(player2Name)) >= 2)
+                && (tieBreakScore.get(player1Name) >= 7 || tieBreakScore.get(player2Name) >= 7);
     }
+
+    @Override
+    public void updateScore(String playerName) {
+        tieBreakScore.put(playerName, tieBreakScore.get(playerName) + 1);
+    }
+
 
     public Map<String, Integer> getTieBreakScore() {
         return new HashMap<>(tieBreakScore);

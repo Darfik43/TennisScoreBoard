@@ -8,10 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Scoreboard</title>
+    <meta charset="UTF-8">
+    <title>Tennis Scoreboard</title>
 </head>
 <body>
-    <h1>Scoreboard</h1>
-    <p></p>
+
+<h1>Tennis Scoreboard</h1>
+
+<!-- Scoreboard view logic -->
+
 </body>
 </html>

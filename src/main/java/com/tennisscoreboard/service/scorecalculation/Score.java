@@ -6,11 +6,10 @@ import com.tennisscoreboard.model.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Score {
+public class Score implements ScoreCounter {
     private final SetScore setScore;
     private final Map<String, Integer> matchScore;
-    private Match match;
-
+    private boolean isFinished;
     private final String player1Name;
     private final String player2Name;
 
@@ -19,31 +18,38 @@ public class Score {
         this.player1Name = match.getPlayer1().getName();
         this.player2Name = match.getPlayer2().getName();
         this.setScore = new SetScore(player1Name, player2Name);
+        this.isFinished = false;
     }
 
-    public void initializeMatchScore() {
+    @Override
+    public void initialize() {
         matchScore.put(player1Name, 0);
         matchScore.put(player2Name, 0);
-        setScore.initializeSetScore();
+        setScore.initialize();
+        isFinished = false;
     }
 
     public void player1WinsPoint() {
-        updateMatchScore(player1Name);
+        updateScore(player1Name);
     }
 
     public void player2WinsPoint() {
-        updateMatchScore(player2Name);
+        updateScore(player2Name);
     }
 
-    private void updateMatchScore(String playerName) {
-        matchScore.put(playerName, matchScore.get(playerName) + 1);
+    @Override
+    public boolean isFinished() {
+        return isFinished;
     }
 
-    public Map<String, Integer> getMatchScore() {
+    public Map<String, Integer> getScore() {
         return new HashMap<>(matchScore);
     }
 
-    public boolean isMatchFinished() {
-        return matchScore.get(player1Name) == 2 || matchScore.get(player2Name) == 2;
+    public void updateScore(String playerName) {
+        if (setScore.isFinished()) {
+            matchScore.put(playerName, matchScore.get(playerName) + 1);
+            isFinished = matchScore.get(player1Name) == 2 || matchScore.get(player2Name) == 2;
+        }
     }
 }

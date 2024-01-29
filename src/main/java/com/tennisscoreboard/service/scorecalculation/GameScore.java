@@ -3,31 +3,50 @@ package com.tennisscoreboard.service.scorecalculation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameScore {
+public class GameScore implements ScoreCounter {
     private final Map<String, TennisPoint> gameScore;
     private final String player1Name;
     private final String player2Name;
+    private boolean isFinished;
 
-    protected GameScore(String player1Name, String player2Name) {
+    public GameScore(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.gameScore = new HashMap<>();
+        this.isFinished = false;
     }
 
-    public void initializeGameScore() {
+
+    @Override
+    public void initialize() {
         gameScore.put(player1Name, TennisPoint.LOVE);
         gameScore.put(player2Name, TennisPoint.LOVE);
+        this.isFinished = false;
     }
 
     public void player1WinsPoint() {
-        updateGameScore(player1Name);
+        updateScore(player1Name);
     }
 
     public void player2WinsPoint() {
-        updateGameScore(player2Name);
+        updateScore(player2Name);
     }
 
-    private void updateGameScore(String playerName) {
+    @Override
+    public boolean isFinished() {
+        TennisPoint player1GameScore = gameScore.get(player1Name);
+        TennisPoint player2GameScore = gameScore.get(player2Name);
+
+        return (player1GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player2GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
+                (player2GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player1GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
+                (player1GameScore == TennisPoint.ADVANTAGE || player2GameScore == TennisPoint.ADVANTAGE);
+    }
+
+    public Map<String, TennisPoint> getScore() {
+        return new HashMap<>(gameScore);
+    }
+
+    public void updateScore(String playerName) {
         TennisPoint currentScore = gameScore.get(playerName);
 
         if (currentScore == TennisPoint.LOVE) {
@@ -62,15 +81,6 @@ public class GameScore {
 
     public Map<String, TennisPoint> getGameScore() {
         return new HashMap<>(gameScore);
-    }
-
-    public boolean isGameFinished() {
-        TennisPoint player1GameScore = gameScore.get(player1Name);
-        TennisPoint player2GameScore = gameScore.get(player2Name);
-
-        return (player1GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player2GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
-                (player2GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player1GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
-                (player1GameScore == TennisPoint.ADVANTAGE || player2GameScore == TennisPoint.ADVANTAGE);
     }
 }
 

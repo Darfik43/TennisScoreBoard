@@ -1,27 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ddp-1
-  Date: 12/23/2023
-  Time: 7:41 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>New match</title>
+    <meta charset="UTF-8">
+    <title>Create Tennis Match</title>
 </head>
 <body>
-    <h1>Create new match</h1>
-    <form action = "${pageContext.request.contextPath}/new-match" method = "post">
-        <p>
-            <%= "Enter a name for the first player:" %>
-            <input name = "playerOneName"/>
-        </p>
-        <p>
-            <%= "Enter a name for the second player:" %>
-            <input name = "playerTwoName">
-        </p>
-        <button>Submit</button>
-    </form>
+
+<h1>Create Tennis Match</h1>
+
+<form action="new-match" method="post">
+    <label for="player1Name">Player 1 Name:</label>
+    <input type="text" id="player1Name" name="player1Name" required>
+    <br>
+    <label for="player2Name">Player 2 Name:</label>
+    <input type="text" id="player2Name" name="player2Name" required>
+    <br>
+    <input type="submit" value="Start Match">
+</form>
+
 </body>
 </html>

@@ -3,44 +3,60 @@ package com.tennisscoreboard.service.scorecalculation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SetScore {
+public class SetScore implements ScoreCounter{
     private final Map<String, Integer> setScore;
     private GameScore gameScore;
     private final String player1Name;
     private final String player2Name;
     private TieBreakScore tieBreakScore;
+    private boolean isFinished;
 
-    protected SetScore(String player1Name, String player2Name) {
+    public SetScore(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.setScore = new HashMap<>();
         this.gameScore = new GameScore(player1Name, player2Name);
+        this.isFinished = false;
     }
 
-    public void initializeSetScore() {
+
+    @Override
+    public void initialize() {
         setScore.put(player1Name, 0);
         setScore.put(player2Name, 0);
-        gameScore.initializeGameScore();
+        gameScore.initialize();
+        isFinished = false;
     }
 
     public void player1WinsPoint() {
-        updateSetScore(player1Name);
+        updateScore(player1Name);
     }
 
     public void player2WinsPoint() {
-        updateSetScore(player2Name);
+        updateScore(player2Name);
     }
 
-    private void updateSetScore(String playerName) {
-        setScore.put(playerName, setScore.get(playerName) + 1);
+    @Override
+    public boolean isFinished() {
+        return ((Math.abs(setScore.get(player1Name) - setScore.get(player2Name))) >= 2)
+                && setScore.get(player1Name) == 7 || setScore.get(player2Name) == 7;
+    }
+
+
+    public Map<String, Integer> getScore() {
+        return new HashMap<>(setScore);
+    }
+
+    public void updateScore(String playerName) {
+        if (gameScore.isFinished()) {
+            setScore.put(playerName, setScore.get(playerName) + 1);
+            gameScore.initialize();
+        }
         if (isTieBreak()) {
             startTieBreak();
         }
     }
 
-    public Map<String, Integer> getSetScore() {
-        return new HashMap<>(setScore);
-    }
 
     private boolean isTieBreak() {
         return setScore.get(player1Name) == 6 && setScore.get(player2Name) == 6;
@@ -48,15 +64,6 @@ public class SetScore {
 
     private void startTieBreak() {
         this.tieBreakScore = new TieBreakScore(player1Name, player2Name);
-        tieBreakScore.initializeTieBreakScore();
-    }
-
-    public boolean isSetFinished() {
-        if (((Math.abs(setScore.get(player1Name) - setScore.get(player2Name))) >= 2)
-                && setScore.get(player1Name) == 7 || setScore.get(player2Name) == 7) {
-            return true;
-        } else {
-            return false;
-        }
+        tieBreakScore.initialize();
     }
 }
