@@ -45,7 +45,7 @@ public class TieBreakScore implements ScoreCounter {
 
     @Override
     public void updateScore(String playerName) {
-        if(!isFinished) {
+        if (!isFinished) {
             tieBreakScore.put(playerName, tieBreakScore.get(playerName) + 1);
             updateFinishedStatus();
         }
