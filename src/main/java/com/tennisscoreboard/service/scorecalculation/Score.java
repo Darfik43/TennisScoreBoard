@@ -42,6 +42,10 @@ public class Score implements ScoreCounter {
         return isFinished;
     }
 
+    private void updateFinishedStatus() {
+        isFinished = matchScore.get(player1Name) == 2 || matchScore.get(player2Name) == 2;
+    }
+
     public Map<String, Integer> getScore() {
         return new HashMap<>(matchScore);
     }
@@ -49,7 +53,7 @@ public class Score implements ScoreCounter {
     public void updateScore(String playerName) {
         if (setScore.isFinished()) {
             matchScore.put(playerName, matchScore.get(playerName) + 1);
-            isFinished = matchScore.get(player1Name) == 2 || matchScore.get(player2Name) == 2;
+            updateFinishedStatus();
         }
     }
 }

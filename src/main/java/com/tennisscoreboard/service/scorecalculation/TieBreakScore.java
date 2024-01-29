@@ -35,13 +35,18 @@ public class TieBreakScore implements ScoreCounter {
 
     @Override
     public boolean isFinished() {
-        return (Math.abs(tieBreakScore.get(player1Name) - tieBreakScore.get(player2Name)) >= 2)
+        return isFinished;
+    }
+
+    private void updateFinishedStatus() {
+        isFinished = (Math.abs(tieBreakScore.get(player1Name) - tieBreakScore.get(player2Name)) >= 2)
                 && (tieBreakScore.get(player1Name) >= 7 || tieBreakScore.get(player2Name) >= 7);
     }
 
     @Override
     public void updateScore(String playerName) {
         tieBreakScore.put(playerName, tieBreakScore.get(playerName) + 1);
+        updateFinishedStatus();
     }
 
 

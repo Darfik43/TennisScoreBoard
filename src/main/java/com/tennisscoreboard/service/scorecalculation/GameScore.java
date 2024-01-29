@@ -34,10 +34,14 @@ public class GameScore implements ScoreCounter {
 
     @Override
     public boolean isFinished() {
+        return isFinished;
+    }
+
+    private void updateFinishedStatus() {
         TennisPoint player1GameScore = gameScore.get(player1Name);
         TennisPoint player2GameScore = gameScore.get(player2Name);
 
-        return (player1GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player2GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
+        isFinished = (player1GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player2GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
                 (player2GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player1GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
                 (player1GameScore == TennisPoint.ADVANTAGE || player2GameScore == TennisPoint.ADVANTAGE);
     }
@@ -70,8 +74,7 @@ public class GameScore implements ScoreCounter {
             gameScore.put(playerName, TennisPoint.FORTY);
             gameScore.put(getOpponentName(playerName), TennisPoint.FORTY);
         } else {
-            gameScore.put(playerName, TennisPoint.LOVE);
-            gameScore.put(getOpponentName(playerName), TennisPoint.LOVE);
+            updateFinishedStatus();
         }
     }
 
