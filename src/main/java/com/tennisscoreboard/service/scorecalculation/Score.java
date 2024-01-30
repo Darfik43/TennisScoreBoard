@@ -13,11 +13,11 @@ public class Score implements ScoreCounter {
     private final String player1Name;
     private final String player2Name;
 
-    public Score(Match match) {
+    public Score(Match match, SetScore setScore) {
         this.matchScore = new HashMap<>();
         this.player1Name = match.getPlayer1().getName();
         this.player2Name = match.getPlayer2().getName();
-        this.setScore = new SetScore(player1Name, player2Name);
+        this.setScore = setScore;
         this.isFinished = false;
     }
 

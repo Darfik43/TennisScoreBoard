@@ -3,7 +3,7 @@ package com.tennisscoreboard.service.scorecalculation;
 import java.util.Map;
 import java.util.Optional;
 
-public interface ScoreCounter {
+public interface  ScoreCounter {
     void initialize();
     void player1WinsPoint();
     void player2WinsPoint();

@@ -5,17 +5,17 @@ import java.util.Map;
 
 public class SetScore implements ScoreCounter {
     private final Map<String, Integer> setScore;
-    private GameScore gameScore;
+    private final GameScore gameScore;
     private final String player1Name;
     private final String player2Name;
     private TieBreakScore tieBreakScore;
     private boolean isFinished;
 
-    public SetScore(String player1Name, String player2Name) {
+    public SetScore(String player1Name, String player2Name, GameScore gameScore) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.setScore = new HashMap<>();
-        this.gameScore = new GameScore(player1Name, player2Name);
+        this.gameScore = gameScore;
         this.isFinished = false;
     }
 
@@ -50,6 +50,7 @@ public class SetScore implements ScoreCounter {
         return new HashMap<>(setScore);
     }
 
+    @Override
     public void updateScore(String playerName) {
         if (isTieBreak()) {
             tieBreakScore.initialize();

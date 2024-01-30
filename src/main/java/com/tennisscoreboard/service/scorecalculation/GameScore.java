@@ -40,7 +40,6 @@ public class GameScore implements ScoreCounter {
     private void updateFinishedStatus() {
         TennisPoint player1GameScore = gameScore.get(player1Name);
         TennisPoint player2GameScore = gameScore.get(player2Name);
-
         isFinished = (player1GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player2GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
                 (player2GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player1GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
                 (player1GameScore == TennisPoint.ADVANTAGE || player2GameScore == TennisPoint.ADVANTAGE);
