@@ -1,4 +1,5 @@
 package com.tennisscoreboard.service.scorecalculation;
 
-public class ScoreManager {
+public class MatchManager {
+
 }

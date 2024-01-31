@@ -11,12 +11,9 @@ import java.util.*;
 
 public class CurrentMatchServiceImpl implements CurrentMatchService {
 
-    private final Map<UUID, Match> currentMatches = new HashMap<>();
-    private final MatchDao matchDao;
+    private static final Map<UUID, Match> currentMatches = new HashMap<>();
+    private final MatchDao matchDao = new MatchDao();
 
-    public CurrentMatchServiceImpl(MatchDao matchDao) {
-        this.matchDao = matchDao;
-    }
 
     @Override
     public void startNewMatch(Player player1, Player player2) {
@@ -38,7 +35,7 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
 
     @Override
     public void saveFinishedMatch(Match match) {
-        matchDao.createMatch(match);
+        matchDao.create(match);
     }
 }
 

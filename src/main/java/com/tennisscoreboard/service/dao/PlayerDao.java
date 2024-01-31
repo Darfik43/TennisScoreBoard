@@ -1,38 +1,45 @@
 package com.tennisscoreboard.service.dao;
 import com.tennisscoreboard.DatabaseHandler;
+import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
+import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-public class PlayerDao implements PlayerDaoInterface {
+import java.util.Optional;
 
-    private final Session session;
+public class PlayerDao implements Dao<Player> {
 
-    public PlayerDao(Session session) {
-        this.session = session;
-    }
     @Override
-    public Player getPlayerById(Long id) {
+    public Optional<Player> getById(Long id) {
+        Player player = null;
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
-            return session.get(Player.class, id);
+            session.beginTransaction();
+            player = session.get(Player.class, id);
+            session.getTransaction().commit();
+        } catch (HibernateError e) {
+            System.out.println("This player doesn't exist");
         }
+        return Optional.ofNullable(player);
     }
 
-    @Override
-    public Player getPlayerByName(String playerName) {
-        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Player WHERE name = :name ", Player.class)
-                    .setParameter("name", playerName).uniqueResult();
-        }
-    }
+//    @Override
+//    public Player getPlayerByName(String playerName) {
+//        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
+//            return session.createQuery("FROM Player WHERE name = :name ", Player.class)
+//                    .setParameter("name", playerName).uniqueResult();
+//        }
+//    }
 
     @Override
-    public void createPlayer(Player player) {
+    public void create(Player player) {
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.persist(player);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Can't create player");
         }
     }
 }

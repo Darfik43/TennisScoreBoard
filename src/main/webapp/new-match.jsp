@@ -9,7 +9,7 @@
 
 <h1>Create Tennis Match</h1>
 
-<form action="new-match" method="post">
+<form action="nmatch" method="post">
     <label for="player1Name">Player 1 Name:</label>
     <input type="text" id="player1Name" name="player1Name" required>
     <br>
