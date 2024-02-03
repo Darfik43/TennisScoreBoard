@@ -21,10 +21,9 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
 
 
     @Override
-    public void startNewMatch(Player player1, Player player2) {
+    public void startNewMatch(Player player1, Player player2, UUID uuid) {
         Match match = new Match(player1, player2);
-        UUID matchId = UUID.randomUUID();
-        currentMatches.put(matchId, match);
+        currentMatches.put(uuid, match);
         Score score = new Score(match, new SetScore(match.getPlayer1().getName(), match.getPlayer2().getName(), new GameScore(match.getPlayer1().getName(), match.getPlayer2().getName())));
     }
 

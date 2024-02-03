@@ -50,7 +50,6 @@ public class GameScore implements ScoreCounter {
     }
 
     public void updateScore(String playerName) {
-        if (!isFinished) {
             TennisPoint currentScore = gameScore.get(playerName);
 
             if (currentScore == TennisPoint.LOVE) {
@@ -62,7 +61,6 @@ public class GameScore implements ScoreCounter {
             } else if (currentScore == TennisPoint.FORTY) {
                 handleAdvantage(playerName);
             }
-        }
     }
 
     private void handleAdvantage(String playerName) {

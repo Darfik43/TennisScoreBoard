@@ -8,16 +8,18 @@ import java.util.Map;
 
 public class Score implements ScoreCounter {
     private final SetScore setScore;
+    private final GameScore gameScore;
     private final Map<String, Integer> matchScore;
     private boolean isFinished;
     private final String player1Name;
     private final String player2Name;
 
-    public Score(Match match, SetScore setScore) {
+    public Score(String player1Name, String player2Name) {
         this.matchScore = new HashMap<>();
-        this.player1Name = match.getPlayer1().getName();
-        this.player2Name = match.getPlayer2().getName();
-        this.setScore = setScore;
+        this.player1Name = player1Name;
+        this.player2Name = player2Name;
+        this.setScore = new SetScore(player1Name, player2Name);
+        this.gameScore = new GameScore(player1Name, player2Name);
         this.isFinished = false;
     }
 
@@ -26,6 +28,7 @@ public class Score implements ScoreCounter {
         matchScore.put(player1Name, 0);
         matchScore.put(player2Name, 0);
         setScore.initialize();
+        gameScore.initialize();
         isFinished = false;
     }
 
@@ -54,6 +57,18 @@ public class Score implements ScoreCounter {
         if (!isFinished && setScore.isFinished()) {
             matchScore.put(playerName, matchScore.get(playerName) + 1);
             updateFinishedStatus();
+        } else if (!setScore.isFinished()) {
+            setScore.updateScore(playerName);
+        } else if (!gameScore.isFinished()) {
+            gameScore.updateScore(playerName);
         }
+    }
+
+    public boolean isSetFinished() {
+        return setScore.isFinished();
+    }
+
+    public boolean isGameFinished() {
+        return gameScore.isFinished();
     }
 }

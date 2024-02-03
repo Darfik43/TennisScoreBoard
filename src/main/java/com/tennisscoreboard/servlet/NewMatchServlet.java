@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet("/nmatch")
 public class NewMatchServlet extends HttpServlet {
@@ -29,9 +30,10 @@ public class NewMatchServlet extends HttpServlet {
 
         Player player1 = playersService.createPlayer(player1Name);
         Player player2 = playersService.createPlayer(player2Name);
+        UUID uuid = UUID.randomUUID();
 
-        currentMatchService.startNewMatch(player1, player2);
+        currentMatchService.startNewMatch(player1, player2, uuid);
 
-        response.sendRedirect(request.getContextPath() + "/match.jsp");
+        response.sendRedirect("match-score?uuid=" + uuid);
     }
 }
