@@ -8,11 +8,16 @@ import com.tennisscoreboard.service.scorecalculation.Score;
 import com.tennisscoreboard.service.scorecalculation.SetScore;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CurrentMatchServiceImpl implements CurrentMatchService {
 
-    private static final Map<UUID, Match> currentMatches = new HashMap<>();
+    private static final Map<UUID, Match> currentMatches = new ConcurrentHashMap<>();
     private final MatchDao matchDao = new MatchDao();
+
+    public static CurrentMatchServiceImpl getInstance() {
+        return new CurrentMatchServiceImpl();
+    }
 
 
     @Override

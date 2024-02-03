@@ -22,31 +22,31 @@ public class AppStart implements ServletContextListener, HttpSessionListener, Ht
 
     public void startApp()  {
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
+//            Transaction transaction = session.beginTransaction();
+//
+//            MatchDao matchDao = new MatchDao(session);
+//            PlayerDao playerDao = new PlayerDao(session);
+//
+//            Player player1 = new Player();
+//            player1.setName("J.Wick");
+//            Player player2 = new Player();
+//            player2.setName("B.Gates");
+//
+//
+//            playerDao.create(player1);
+//            System.out.println(playerDao.getPlayerByName("J.Wick"));
+//            playerDao.create(player2);
+//            System.out.println(playerDao.getPlayerByName("B.Gates"));
+//
+//            Match m1 = new Match();
+//
+//            m1.setPlayer1(player1);
+//            m1.setPlayer2(player2);
+//            m1.setWinner(player1);
+//            matchDao.create(m1);
+//            System.out.println(matchDao.getById(1));
 
-            MatchDao matchDao = new MatchDao(session);
-            PlayerDao playerDao = new PlayerDao(session);
-
-            Player player1 = new Player();
-            player1.setName("J.Wick");
-            Player player2 = new Player();
-            player2.setName("B.Gates");
-
-
-            playerDao.createPlayer(player1);
-            System.out.println(playerDao.getPlayerByName("J.Wick"));
-            playerDao.createPlayer(player2);
-            System.out.println(playerDao.getPlayerByName("B.Gates"));
-
-            Match m1 = new Match();
-
-            m1.setPlayer1(player1);
-            m1.setPlayer2(player2);
-            m1.setWinner(player1);
-            matchDao.createNewMatch(m1);
-            System.out.println(matchDao.getMatchById(1));
-
-            transaction.commit();
+//            transaction.commit();
 
         }
     }
