@@ -18,7 +18,12 @@ public class MatchScoreServlet extends HttpServlet {
     private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UUID uuid = UUID.fromString(req.getParameter("uuid"));
+        MatchManager matchManager = MatchManager.getInstance(uuid);
+        matchManager.initNewMatch();
+
         req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(UUID.fromString(req.getParameter("uuid"))));
+        req.setAttribute("score", matchManager.getScore());
         req.getRequestDispatcher("match.jsp").forward(req, resp);
     }
 
@@ -28,6 +33,14 @@ public class MatchScoreServlet extends HttpServlet {
         MatchManager matchManager = MatchManager.getInstance(uuid);
         matchManager.initNewMatch();
 
-        //TODO
+        String action = req.getParameter("action");
+        if ("player1".equals(action)) {
+            matchManager.playerWonPoint(matchManager.getPlayer1Name());
+        } else if ("player2".equals(action)) {
+            matchManager.playerWonPoint(matchManager.getPlayer2Name());
+        }
+
+        req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
+        req.getRequestDispatcher("match.jsp").forward(req, resp);
     }
 }

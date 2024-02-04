@@ -2,14 +2,19 @@ package com.tennisscoreboard.service.scorecalculation;
 
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
+import lombok.Getter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class MatchManager {
 
     CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
     private final Score score;
+    @Getter
     private final String player1Name;
+    @Getter
     private final String player2Name;
 
     public MatchManager(UUID uuid) {
@@ -30,7 +35,7 @@ public class MatchManager {
         score.updateScore(playerName);
     }
 
-    public void getScore() {
-        //TODO
+    public Map<String, Integer> getScore() {
+        return score.getScore();
     }
 }
