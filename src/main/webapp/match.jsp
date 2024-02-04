@@ -1,50 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.tennisscoreboard.model.Match" %>
-<%@ page import="com.tennisscoreboard.model.Player" %>
-
-<%
-    Match currentMatch = (Match) request.getSession().getAttribute("currentMatch");
-%>
-
+        <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Tennis Scoreboard</title>
+    <title>Tennis Match Score</title>
 </head>
 <body>
+<h1>Tennis Match Score</h1>
 
-<h2>Tennis Scoreboard</h2>
-
-<%
-    if (currentMatch != null && !currentMatch.isEmpty()) {
+<% com.tennisscoreboard.model.Match currentMatch = null;
+    if (request.getAttribute("currentMatch") != null) {
+        currentMatch = (com.tennisscoreboard.model.Match) request.getAttribute("currentMatch");
 %>
-<table border="1">
-    <tr>
-        <th>Player</th>
-        <th>Set Score</th>
-        <th>Game Score</th>
-        <th>Tiebreak Score</th>
-        <th>Actions</th>
-    </tr>
-    <tr>
-        <td><%= currentMatch.getPlayer1().getName() %></td>
-        <td><%= currentMatch.getSetScore().get(currentMatch.getPlayer1()) %></td>
-        <td><%= currentMatch.getGameScore().get(currentMatch.getPlayer1()) %></td>
-        <td><%= currentMatch.getTieBreakScore().get(currentMatch.getPlayer1()) %></td>
-        <td><a href="/increaseScore?matchId=<%= currentMatch.getId() %>&playerId=<%= currentMatch.getPlayer1().getId() %>">Increase Score</a></td>
-    </tr>
-    <tr>
-        <td><%= currentMatch.getPlayer2().getName() %></td>
-        <td><%= currentMatch.getSetScore().get(currentMatch.getPlayer2()) %></td>
-        <td><%= currentMatch.getGameScore().get(currentMatch.getPlayer2()) %></td>
-        <td><%= currentMatch.getTieBreakScore().get(currentMatch.getPlayer2()) %></td>
-        <td><a href="/increaseScore?matchId=<%= currentMatch.getId() %>&playerId=<%= currentMatch.getPlayer2().getId() %>">Increase Score</a></td>
-    </tr>
-</table>
+<h2>Match Details</h2>
+<p>Player 1: <%=currentMatch.getPlayer1().getName()%></p>
+<p>Player 2: <%=currentMatch.getPlayer2().getName()%></p>
+<% } %>
 <%
-    }
+    com.tennisscoreboard.service.scorecalculation.MatchManager matchManager = (com.tennisscoreboard.service.scorecalculation.MatchManager) request.getAttribute("score");
 %>
+<h2>Current Score</h2>
+<p>Player 1: <%= matchManager != null ? matchManager.getPlayer1Name() + " - " + matchManager.getScore() : "" %></p>
+<p>Player 1: <%= matchManager != null ? matchManager.getPlayer2Name() + " - " + matchManager.getScore() : "" %></p>
 
+<form action="match-score" method="post">
+    <!--<input type="hidden" name="uuid" value="<//%=currentMatch != null ? currentMatch.getUuid() : ""%>"> -->
+    <button type="submit" name="action" value="player1">Player 1 Won</button>
+    <button type="submit" name="action" value="player2">Player 2 Won</button>
+</form>
 </body>
 </html>
