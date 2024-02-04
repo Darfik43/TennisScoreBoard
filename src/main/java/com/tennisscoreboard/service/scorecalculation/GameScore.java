@@ -82,7 +82,7 @@ public class GameScore implements ScoreCounter {
     }
 
     public Map<String, TennisPoint> getGameScore() {
-        return new HashMap<>(gameScore);
+        return gameScore;
     }
 }
 

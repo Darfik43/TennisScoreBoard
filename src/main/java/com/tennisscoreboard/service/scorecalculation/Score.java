@@ -50,8 +50,15 @@ public class Score implements ScoreCounter {
     }
 
     public Map<String, Integer> getScore() {
+        return matchScore;
+    }
+    public Map<String, Integer> getSetScore() {
+        return setScore.getScore();
+    }
+    public Map<String, Integer> getGameScore() {
         return new HashMap<>(matchScore);
     }
+
 
     public void updateScore(String playerName) {
         if (!isFinished && setScore.isFinished()) {

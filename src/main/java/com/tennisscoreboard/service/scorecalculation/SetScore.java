@@ -44,7 +44,7 @@ public class SetScore implements ScoreCounter {
     }
 
     public Map<String, Integer> getScore() {
-        return new HashMap<>(setScore);
+        return setScore;
     }
 
     @Override
