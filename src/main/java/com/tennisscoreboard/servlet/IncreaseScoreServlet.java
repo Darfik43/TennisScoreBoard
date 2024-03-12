@@ -2,6 +2,8 @@ package com.tennisscoreboard.servlet;
 
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
+import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
+import com.tennisscoreboard.service.scorecalculation.MatchManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,41 +16,36 @@ import java.util.UUID;
 @WebServlet("/increaseScore")
 public class IncreaseScoreServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Получаем параметры из запроса
         String matchIdString = request.getParameter("matchId");
-        String playerIdString = request.getParameter("playerId");
+        String action = request.getParameter("action");
 
         // Проверяем, что параметры не пустые
-        if (matchIdString != null && playerIdString != null) {
+        if (matchIdString != null && action != null) {
             try {
-                // Преобразуем строки в UUID и Long
+                // Преобразуем строку в UUID
                 UUID matchId = UUID.fromString(matchIdString);
-                Long playerId = Long.parseLong(playerIdString);
 
-                // Получаем текущий матч из сессии
-                Match currentMatch = (Match) request.getSession().getAttribute("currentMatch");
+                // Получаем текущий матч из сервиса
+                MatchManager matchManager = MatchManager.getInstance(matchId);
+                matchManager.initNewMatch();
 
-                // Проверяем, что матч существует и его ID совпадает с параметром из запроса
-                if (currentMatch != null && currentMatch.getId().equals(matchId)) {
-                    // Получаем игрока по ID
-                    Player player = currentMatch.getPlayer1();
-
-                    // Проверяем, что игрок существует
-                    if (player != null) {
-                        // Обрабатываем увеличение счета (ваша бизнес-логика)
-                        // Здесь вы можете использовать ваш сервис для увеличения счета
-
-                        // Пример: увеличение счета игрока
-
-                        // Обновляем сессию с обновленным матчем
-                        request.getSession().setAttribute("currentMatch", currentMatch);
-
-                        // Перенаправляем на страницу счета
-                        response.sendRedirect(request.getContextPath() + "/match.jsp");
-                        return;
-                    }
+                // Увеличиваем счет в зависимости от действия
+                if ("player1".equals(action)) {
+                    matchManager.playerWonPoint(matchManager.getPlayer1Name());
+                } else if ("player2".equals(action)) {
+                    matchManager.playerWonPoint(matchManager.getPlayer2Name());
                 }
+
+                // Обновляем сессию с обновленным матчем
+                request.getSession().setAttribute("currentMatch", currentMatchService.getCurrentMatch(matchId));
+
+                // Перенаправляем на страницу счета
+                response.sendRedirect(request.getContextPath() + "/match.jsp?uuid=" + matchId);
+                return;
             } catch (IllegalArgumentException e) {
                 // Обработка ошибки преобразования параметров
                 e.printStackTrace();
