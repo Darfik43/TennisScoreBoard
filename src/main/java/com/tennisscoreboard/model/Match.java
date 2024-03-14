@@ -18,7 +18,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class Match {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        //@GeneratedValue(strategy = GenerationType.IDENTITY)
         private UUID id;
 
         @ManyToOne

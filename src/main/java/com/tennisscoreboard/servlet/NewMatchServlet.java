@@ -34,6 +34,8 @@ public class NewMatchServlet extends HttpServlet {
 
         currentMatchService.startNewMatch(player1, player2, uuid);
 
-        response.sendRedirect("match-score?uuid=" + uuid);
+
+        request.getSession().setAttribute("matchId", uuid);
+        response.sendRedirect("match-score?matchId=" + uuid);
     }
 }

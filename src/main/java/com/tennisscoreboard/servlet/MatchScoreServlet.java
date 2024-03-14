@@ -18,7 +18,8 @@ public class MatchScoreServlet extends HttpServlet {
     private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UUID uuid = UUID.fromString(req.getParameter("uuid"));
+        UUID uuid = (UUID) req.getSession().getAttribute("matchId");
+
 
         MatchManager matchManager = MatchManager.getInstance(uuid);
         matchManager.initNewMatch();
@@ -32,7 +33,7 @@ public class MatchScoreServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UUID uuid = UUID.fromString(req.getParameter("uuid"));
+        UUID uuid = UUID.fromString(req.getParameter("matchId"));
         MatchManager matchManager = MatchManager.getInstance(uuid);
         matchManager.initNewMatch();
 
