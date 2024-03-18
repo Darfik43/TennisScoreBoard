@@ -18,7 +18,7 @@ public class MatchScoreServlet extends HttpServlet {
     private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UUID uuid = (UUID) req.getSession().getAttribute("matchId");
+        UUID uuid = UUID.fromString(req.getParameter("matchId"));
 
 
         MatchManager matchManager = MatchManager.getInstance(uuid);

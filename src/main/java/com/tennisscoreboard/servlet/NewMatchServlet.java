@@ -30,12 +30,12 @@ public class NewMatchServlet extends HttpServlet {
 
         Player player1 = playersService.createPlayer(player1Name);
         Player player2 = playersService.createPlayer(player2Name);
-        UUID uuid = UUID.randomUUID();
+        UUID uuid = UUID.fromString(request.getParameter("matchId"));
+
 
         currentMatchService.startNewMatch(player1, player2, uuid);
 
-
-        request.getSession().setAttribute("matchId", uuid);
+        request.setAttribute("matchId,", uuid);
         response.sendRedirect("match-score?matchId=" + uuid);
     }
 }
