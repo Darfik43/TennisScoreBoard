@@ -16,13 +16,15 @@ import java.util.UUID;
 public class MatchScoreServlet extends HttpServlet {
 
     private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UUID uuid = UUID.fromString(req.getParameter("matchId"));
-
-
         MatchManager matchManager = MatchManager.getInstance(uuid);
+
         matchManager.initNewMatch();
+
         req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
         req.setAttribute("player1Name", matchManager.getPlayer1Name());
         req.setAttribute("player2Name", matchManager.getPlayer2Name());
@@ -45,6 +47,7 @@ public class MatchScoreServlet extends HttpServlet {
         }
 
         req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
+        req.setAttribute("matchId,", uuid);
         req.getRequestDispatcher("match.jsp").forward(req, resp);
     }
 }

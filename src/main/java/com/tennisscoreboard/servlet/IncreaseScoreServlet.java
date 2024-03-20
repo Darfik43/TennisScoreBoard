@@ -19,9 +19,9 @@ public class IncreaseScoreServlet extends HttpServlet {
     private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UUID uuid = (UUID) request.getSession().getAttribute("matchId");
-
-        if (uuid != null) {
+        String matchIdParam = request.getParameter("matchId");
+        if (matchIdParam != null) {
+            UUID uuid = UUID.fromString(matchIdParam);
             try {
                 MatchManager matchManager = MatchManager.getInstance(uuid);
                 matchManager.initNewMatch();
