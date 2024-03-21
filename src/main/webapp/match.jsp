@@ -1,5 +1,6 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.UUID" %>
+<%@ page import="com.tennisscoreboard.service.scorecalculation.MatchManager" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,7 @@
     UUID matchId = (UUID) request.getAttribute("matchId");
     String player1Name = (String) request.getAttribute("player1Name");
     String player2Name = (String) request.getAttribute("player2Name");
-    Map<String, Integer> score = (Map<String, Integer>) request.getAttribute("score");
+    MatchManager matchManager = (MatchManager) request.getSession().getAttribute("matchManager");
 %>
 
 <% if (matchId != null) { %>
@@ -24,9 +25,9 @@
 <% } %>
 
 <h2>Current Score</h2>
-<% if (score != null) { %>
-<p>Player 1: <%= player1Name %> - <%= score.get(player1Name) %></p>
-<p>Player 2: <%= player2Name %> - <%= score.get(player2Name) %></p>
+<% if (matchManager != null) { %>
+<p>Player 1: <%= player1Name %> - <%= matchManager.getScore() %></p>
+<p>Player 2: <%= player2Name %> - <%= matchManager.getScore() %></p>
 <% } %>
 
 <form action="increaseScore?matchId=<%= matchId %>" method="post">
