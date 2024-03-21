@@ -4,6 +4,7 @@ import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
 import com.tennisscoreboard.service.PlayersService;
 import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
+import com.tennisscoreboard.service.scorecalculation.MatchManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,8 +35,15 @@ public class NewMatchServlet extends HttpServlet {
 
 
         currentMatchService.startNewMatch(player1, player2, uuid);
-
+        MatchManager matchManager = MatchManager.getInstance(uuid);
+        matchManager.initNewMatch();
+        request.setAttribute("matchManager", matchManager);
+        request.setAttribute("player1Name", matchManager.getPlayer1Name());
+        request.setAttribute("player2Name", matchManager.getPlayer2Name());
         request.setAttribute("matchId,", uuid);
-        response.sendRedirect("match-score?matchId=" + uuid);
+        //new
+        request.getRequestDispatcher("match-score?matchId=" + uuid).forward(request, response);
+        //
+        //response.sendRedirect("match-score?matchId=" + uuid);
     }
 }

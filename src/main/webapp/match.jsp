@@ -29,21 +29,13 @@
 <p>Player 2: <%= player2Name %> - <%= score.get(player2Name) %></p>
 <% } %>
 
-<%--<form action="increaseScore" method="post">--%>
-<%--    <input type="hidden" name="matchId" value="<%= matchId != null ? matchId : "" %>">--%>
-<%--    <button type="submit" name="action" value="player1">Player 1 Won</button>--%>
-<%--</form>--%>
-
-<%--<form action="increaseScore" method="post">--%>
-<%--    <input type="hidden" name="matchId" value="<%= matchId != null ? matchId : "" %>">--%>
-<%--    <button type="submit" name="action" value="player2">Player 2 Won</button>--%>
-<%--</form>--%>
-
 <form action="increaseScore?matchId=<%= matchId %>" method="post">
+    <input type="hidden" name="matchId" value="<%= request.getAttribute("matchId") %>">
     <button type="submit" name="action" value="player1">Player 1 Won</button>
 </form>
 
 <form action="increaseScore?matchId=<%= matchId %>" method="post">
+    <input type="hidden" name="matchId" value="<%= request.getAttribute("matchId") %>">
     <button type="submit" name="action" value="player2">Player 2 Won</button>
 </form>
 
