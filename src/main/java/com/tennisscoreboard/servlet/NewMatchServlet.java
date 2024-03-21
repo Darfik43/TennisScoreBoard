@@ -37,13 +37,11 @@ public class NewMatchServlet extends HttpServlet {
         currentMatchService.startNewMatch(player1, player2, uuid);
         MatchManager matchManager = MatchManager.getInstance(uuid);
         matchManager.initNewMatch();
-        request.setAttribute("matchManager", matchManager);
+        request.getSession().setAttribute("matchManager", matchManager);
         request.setAttribute("player1Name", matchManager.getPlayer1Name());
         request.setAttribute("player2Name", matchManager.getPlayer2Name());
         request.setAttribute("matchId,", uuid);
-        //new
         request.getRequestDispatcher("match-score?matchId=" + uuid).forward(request, response);
-        //
-        //response.sendRedirect("match-score?matchId=" + uuid);
+
     }
 }

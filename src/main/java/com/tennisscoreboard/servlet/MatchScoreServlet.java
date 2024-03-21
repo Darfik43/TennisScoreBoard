@@ -22,7 +22,7 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UUID uuid = UUID.fromString(req.getParameter("matchId"));
 
-        MatchManager matchManager = (MatchManager) req.getAttribute("matchManager");
+        MatchManager matchManager = (MatchManager) req.getSession().getAttribute("matchManager");
 
         req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
         req.setAttribute("player1Name", matchManager.getPlayer1Name());

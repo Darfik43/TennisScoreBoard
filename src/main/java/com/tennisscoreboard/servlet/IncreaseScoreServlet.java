@@ -23,7 +23,7 @@ public class IncreaseScoreServlet extends HttpServlet {
         if (matchIdParam != null) {
             UUID uuid = UUID.fromString(matchIdParam);
             try {
-                MatchManager matchManager = (MatchManager) request.getAttribute("matchManager");
+                MatchManager matchManager = (MatchManager) request.getSession().getAttribute("matchManager");
 
                 String action = request.getParameter("action");
                 if ("player1".equals(action)) {
