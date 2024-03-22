@@ -33,6 +33,7 @@ public class IncreaseScoreServlet extends HttpServlet {
                 }
 
                 request.getSession().setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
+                request.getSession().setAttribute("matchId", uuid);
 
                 response.sendRedirect("match-score");
                 return;

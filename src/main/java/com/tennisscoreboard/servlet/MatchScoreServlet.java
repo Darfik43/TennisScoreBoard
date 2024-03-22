@@ -20,7 +20,7 @@ public class MatchScoreServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UUID uuid = UUID.fromString(req.getParameter("matchId"));
+        UUID uuid = UUID.fromString(req.getSession().getAttribute("matchId").toString());
 
         MatchManager matchManager = (MatchManager) req.getSession().getAttribute("matchManager");
 
@@ -28,14 +28,14 @@ public class MatchScoreServlet extends HttpServlet {
         req.setAttribute("player1Name", matchManager.getPlayer1Name());
         req.setAttribute("player2Name", matchManager.getPlayer2Name());
         req.setAttribute("score", matchManager.getScore());
-        req.setAttribute("matchId", uuid);
+
 
         req.getRequestDispatcher("match.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UUID uuid = UUID.fromString(req.getParameter("matchId"));
+        UUID uuid = UUID.fromString(req.getSession().getAttribute("matchId").toString());
         MatchManager matchManager = MatchManager.getInstance(uuid);
         matchManager.initNewMatch();
 

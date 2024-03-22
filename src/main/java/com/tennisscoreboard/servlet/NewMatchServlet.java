@@ -41,6 +41,7 @@ public class NewMatchServlet extends HttpServlet {
         request.setAttribute("player1Name", matchManager.getPlayer1Name());
         request.setAttribute("player2Name", matchManager.getPlayer2Name());
         request.setAttribute("matchId,", uuid);
+        request.getSession().setAttribute("matchId", uuid);
         request.getRequestDispatcher("match-score?matchId=" + uuid).forward(request, response);
 
     }
