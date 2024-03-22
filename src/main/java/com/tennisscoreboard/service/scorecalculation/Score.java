@@ -65,10 +65,10 @@ public class Score implements ScoreCounter {
         if (!isFinished && setScore.isFinished()) {
             matchScore.put(playerName, matchScore.get(playerName) + 1);
             updateFinishedStatus();
-        } else if (!setScore.isFinished()) {
-            setScore.updateScore(playerName);
         } else if (!gameScore.isFinished()) {
             gameScore.updateScore(playerName);
+        } else if (!setScore.isFinished()) {
+            setScore.updateScore(playerName);
         }
     }
 

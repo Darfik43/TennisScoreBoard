@@ -51,7 +51,7 @@ public class SetScore implements ScoreCounter {
     public void updateScore(String playerName) {
         if (isTieBreak()) {
             tieBreakScore.initialize();
-        } else {
+        } else{
                 setScore.put(playerName, setScore.get(playerName) + 1);
                 updateFinishedStatus();
             }
