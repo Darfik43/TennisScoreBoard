@@ -56,8 +56,8 @@ public class Score implements ScoreCounter {
     public Map<String, Integer> getSetScore() {
         return setScore.getScore();
     }
-    public Map<String, Integer> getGameScore() {
-        return new HashMap<>(matchScore);
+    public Map<String, TennisPoint> getGameScore() {
+        return gameScore.getGameScore();
     }
 
 

@@ -27,7 +27,7 @@ public class MatchScoreServlet extends HttpServlet {
         req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
         req.setAttribute("player1Name", matchManager.getPlayer1Name());
         req.setAttribute("player2Name", matchManager.getPlayer2Name());
-        req.setAttribute("score", matchManager.getScore());
+        req.setAttribute("score", matchManager.getMatchScore());
 
 
         req.getRequestDispatcher("match.jsp").forward(req, resp);

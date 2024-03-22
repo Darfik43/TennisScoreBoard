@@ -35,7 +35,15 @@ public class MatchManager {
         score.updateScore(playerName);
     }
 
-    public Map<String, Integer> getScore() {
+    public Map<String, Integer> getMatchScore() {
         return score.getScore();
+    }
+
+    public Map<String, Integer> getSetScore() {
+        return score.getSetScore();
+    }
+
+    public Map<String, TennisPoint> getGameScore() {
+        return score.getGameScore();
     }
 }
