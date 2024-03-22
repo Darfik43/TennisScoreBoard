@@ -12,7 +12,7 @@
 <h1>Tennis Match Score</h1>
 
 <%
-    UUID matchId = (UUID) request.getAttribute("matchId");
+    UUID matchId = (UUID) request.getSession().getAttribute("matchId");
     String player1Name = (String) request.getAttribute("player1Name");
     String player2Name = (String) request.getAttribute("player2Name");
     MatchManager matchManager = (MatchManager) request.getSession().getAttribute("matchManager");
@@ -31,16 +31,14 @@
 <% } %>
 
 <form action="increaseScore?matchId=<%= matchId %>" method="post">
-    <input type="hidden" name="matchId" value="<%= request.getAttribute("matchId") %>">
+    <input type="hidden" name="matchId" value="<%= request.getSession().getAttribute("matchId") %>">
     <button type="submit" name="action" value="player1">Player 1 Won</button>
 </form>
 
 <form action="increaseScore?matchId=<%= matchId %>" method="post">
-    <input type="hidden" name="matchId" value="<%= request.getAttribute("matchId") %>">
+    <input type="hidden" name="matchId" value="<%= request.getSession().getAttribute("matchId") %>">
     <button type="submit" name="action" value="player2">Player 2 Won</button>
 </form>
-
-
 
 </body>
 </html>

@@ -50,7 +50,8 @@ public class Score implements ScoreCounter {
     }
 
     public Map<String, Integer> getScore() {
-        return matchScore;
+        //return matchScore;
+        return setScore.getScore();
     }
     public Map<String, Integer> getSetScore() {
         return setScore.getScore();

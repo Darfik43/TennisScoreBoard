@@ -32,14 +32,15 @@ public class IncreaseScoreServlet extends HttpServlet {
                     matchManager.playerWonPoint(matchManager.getPlayer2Name());
                 }
 
-                request.getSession().setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
-                request.getSession().setAttribute("matchId", uuid);
+
 
                 response.sendRedirect("match-score");
                 return;
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             }
+            request.getSession().setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
+            request.getSession().setAttribute("matchId", uuid);
         }
 
         response.sendRedirect(request.getContextPath() + "/error.jsp");
