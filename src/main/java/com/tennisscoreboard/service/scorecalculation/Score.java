@@ -6,6 +6,7 @@ import com.tennisscoreboard.model.Player;
 import java.util.HashMap;
 import java.util.Map;
 
+//Score(MatchScore) - Score of sets within a Match
 public class Score implements ScoreCounter {
     private final SetScore setScore;
     private final GameScore gameScore;
@@ -51,24 +52,33 @@ public class Score implements ScoreCounter {
 
     public Map<String, Integer> getScore() {
         //return matchScore;
-        return setScore.getScore();
+        return matchScore;
     }
+
     public Map<String, Integer> getSetScore() {
         return setScore.getScore();
     }
+
     public Map<String, TennisPoint> getGameScore() {
         return gameScore.getGameScore();
     }
 
 
     public void updateScore(String playerName) {
-        if (!isFinished && setScore.isFinished()) {
-            matchScore.put(playerName, matchScore.get(playerName) + 1);
-            updateFinishedStatus();
-        } else if (!gameScore.isFinished()) {
-            gameScore.updateScore(playerName);
-        } else if (!setScore.isFinished()) {
-            setScore.updateScore(playerName);
+//TODO Handle one of the players won
+
+        if (!isFinished) {
+            if (isGameFinished()) {
+                setScore.updateScore(playerName);
+                gameScore.initialize();
+                if (isSetFinished()) {
+                    matchScore.put(playerName, matchScore.get(playerName) + 1);
+                    updateFinishedStatus();
+                    setScore.initialize();
+                }
+            } else {
+                gameScore.updateScore(playerName);
+            }
         }
     }
 

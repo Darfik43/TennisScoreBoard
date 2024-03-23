@@ -3,6 +3,8 @@ package com.tennisscoreboard.service.scorecalculation;
 import java.util.HashMap;
 import java.util.Map;
 
+
+    // SetScore - Score of games within a set
 public class SetScore implements ScoreCounter {
     private final Map<String, Integer> setScore;
     private final String player1Name;
@@ -40,7 +42,7 @@ public class SetScore implements ScoreCounter {
 
     private void updateFinishedStatus() {
         isFinished = ((Math.abs(setScore.get(player1Name) - setScore.get(player2Name))) >= 2)
-                && setScore.get(player1Name) == 7 || setScore.get(player2Name) == 7;
+                && (setScore.get(player1Name) == 7 || setScore.get(player2Name) == 7);
     }
 
     public Map<String, Integer> getScore() {
@@ -51,10 +53,10 @@ public class SetScore implements ScoreCounter {
     public void updateScore(String playerName) {
         if (isTieBreak()) {
             tieBreakScore.initialize();
-        } else{
+        } else {
                 setScore.put(playerName, setScore.get(playerName) + 1);
-                updateFinishedStatus();
             }
+        updateFinishedStatus();
         }
 
     private boolean isTieBreak() {

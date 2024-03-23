@@ -3,6 +3,8 @@ package com.tennisscoreboard.service.scorecalculation;
 import java.util.HashMap;
 import java.util.Map;
 
+
+    //GameScore - Score within a game
 public class GameScore implements ScoreCounter {
     private final Map<String, TennisPoint> gameScore;
     private final String player1Name;
