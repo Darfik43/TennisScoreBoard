@@ -65,8 +65,6 @@ public class Score implements ScoreCounter {
 
 
     public void updateScore(String playerName) {
-//TODO Handle one of the players won
-
         if (!isFinished) {
             if (isGameFinished()) {
                 setScore.updateScore(playerName);
