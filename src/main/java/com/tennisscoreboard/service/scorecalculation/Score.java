@@ -51,7 +51,6 @@ public class Score implements ScoreCounter {
     }
 
     public Map<String, Integer> getScore() {
-        //return matchScore;
         return matchScore;
     }
 
