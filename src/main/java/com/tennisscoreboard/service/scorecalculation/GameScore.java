@@ -61,6 +61,7 @@ public class GameScore implements ScoreCounter {
             } else if (currentScore == TennisPoint.FORTY) {
                 handleAdvantage(playerName);
             }
+            updateFinishedStatus();
     }
 
     private void handleAdvantage(String playerName) {
