@@ -26,8 +26,8 @@
 
 <h2>Current Score</h2>
 <% if (matchManager != null) { %>
-<p>Player 1: <%= player1Name %> - MatchScore: <%= matchManager.getMatchScore() %> Set Score: <%= matchManager.getSetScore() %> GameScore: <%= matchManager.getGameScore() %></p>
-<p>Player 2: <%= player2Name %> - MatchScore: <%= matchManager.getMatchScore() %> Set Score: <%= matchManager.getSetScore() %> GameScore: <%= matchManager.getGameScore() %>
+<p>Player 1: <%= player1Name %> - MatchScore: <%= matchManager.getMatchScore() %> Set Score: <%= matchManager.getSetScore() %> GameScore: <%= matchManager.getGameScore() %> TieBreakScore: <%= matchManager.getTieBreakScore() %> </p>
+<p>Player 2: <%= player2Name %> - MatchScore: <%= matchManager.getMatchScore() %> Set Score: <%= matchManager.getSetScore() %> GameScore: <%= matchManager.getGameScore() %> TieBreakScore: <%= matchManager.getTieBreakScore() %> </p>
 <% } %>
 
 <form action="increaseScore?matchId=<%= matchId %>" method="post">

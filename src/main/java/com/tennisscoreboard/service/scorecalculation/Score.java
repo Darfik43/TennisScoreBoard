@@ -11,7 +11,9 @@ public class Score implements ScoreCounter {
     private final SetScore setScore;
     private final GameScore gameScore;
     private final Map<String, Integer> matchScore;
+    private final TieBreakScore tieBreakScore;
     private boolean isFinished;
+    private boolean isTieBreak;
     private final String player1Name;
     private final String player2Name;
 
@@ -20,6 +22,7 @@ public class Score implements ScoreCounter {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.setScore = new SetScore(player1Name, player2Name);
+        this.tieBreakScore = new TieBreakScore(player1Name, player2Name);
         this.gameScore = new GameScore(player1Name, player2Name);
         this.isFinished = false;
     }
@@ -29,6 +32,7 @@ public class Score implements ScoreCounter {
         matchScore.put(player1Name, 0);
         matchScore.put(player2Name, 0);
         setScore.initialize();
+        tieBreakScore.initialize();
         gameScore.initialize();
         isFinished = false;
     }
@@ -62,21 +66,31 @@ public class Score implements ScoreCounter {
         return gameScore.getGameScore();
     }
 
+    public Map<String, Integer> getTieBreakScore() {
+        return tieBreakScore.getTieBreakScore();
+    }
+
 
     public void updateScore(String playerName) {
-        gameScore.updateScore(playerName);
 
-        if (isGameFinished()) {
-            setScore.updateScore(playerName);
-            gameScore.initialize();
-            if (isSetFinished()) {
-                matchScore.put(playerName, matchScore.get(playerName) + 1);
-                updateFinishedStatus();
-                setScore.initialize();
+//        if (!isTieBreak) {
+            gameScore.updateScore(playerName);
+            if (isGameFinished()) { //&& !isTieBreak) {
+                setScore.updateScore(playerName);
+                gameScore.initialize();
+                if (isSetFinished()) {
+                    matchScore.put(playerName, matchScore.get(playerName) + 1);
+                    updateFinishedStatus();
+                    //tieBreakScore.initialize();
+                    setScore.initialize();
+                }
             }
+//        } else {
+//            tieBreakScore.updateScore(playerName);
+//            if (tieBreakScore.isTieBreakFinished()) {
+//                setScore.updateScore(playerName);
+//            }
         }
-
-    }
 
     public boolean isSetFinished() {
         return setScore.isFinished();
@@ -84,5 +98,10 @@ public class Score implements ScoreCounter {
 
     public boolean isGameFinished() {
         return gameScore.isFinished();
+    }
+
+    private void isTieBreak() {
+        isTieBreak = setScore.getScore().get(player1Name) == 6
+                && setScore.getScore().get(player2Name) == 6;
     }
 }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-    // SetScore - Score of games within a set
+// SetScore - Score of games within a set
 public class SetScore implements ScoreCounter {
     private final Map<String, Integer> setScore;
     private final String player1Name;
@@ -51,17 +51,10 @@ public class SetScore implements ScoreCounter {
 
     @Override
     public void updateScore(String playerName) {
-        if (isTieBreak()) {
-            tieBreakScore.initialize();
-        } else {
-                setScore.put(playerName, setScore.get(playerName) + 1);
-            }
+        setScore.put(playerName, setScore.get(playerName) + 1);
         updateFinishedStatus();
-        }
-
-    private boolean isTieBreak() {
-        return setScore.get(player1Name) == 6 && setScore.get(player2Name) == 6;
     }
+
 
     private void startTieBreak() {
         this.tieBreakScore = new TieBreakScore(player1Name, player2Name);

@@ -46,4 +46,7 @@ public class MatchManager {
     public Map<String, TennisPoint> getGameScore() {
         return score.getGameScore();
     }
+    public Map<String, Integer> getTieBreakScore() {
+        return score.getTieBreakScore();
+    }
 }
