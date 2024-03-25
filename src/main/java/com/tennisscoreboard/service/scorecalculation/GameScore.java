@@ -39,12 +39,11 @@ public class GameScore implements ScoreCounter {
         return isFinished;
     }
 
-    private void updateFinishedStatus() {
-        TennisPoint player1GameScore = gameScore.get(player1Name);
-        TennisPoint player2GameScore = gameScore.get(player2Name);
-        isFinished = (player1GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player2GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
-                (player2GameScore.ordinal() >= TennisPoint.FORTY.ordinal() && player1GameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
-                (player1GameScore == TennisPoint.ADVANTAGE || player2GameScore == TennisPoint.ADVANTAGE);
+    private void updateFinishedStatus(String playerName) {
+        TennisPoint playerGameScore = gameScore.get(playerName);
+        TennisPoint opponentGameScore = gameScore.get(getOpponentName(playerName));
+        isFinished = (playerGameScore.ordinal() >= TennisPoint.FORTY.ordinal() && opponentGameScore.ordinal() < TennisPoint.FORTY.ordinal()) ||
+                (playerGameScore == TennisPoint.ADVANTAGE && opponentGameScore == TennisPoint.FORTY);
     }
 
     public Map<String, TennisPoint> getScore() {
@@ -53,6 +52,7 @@ public class GameScore implements ScoreCounter {
 
     public void updateScore(String playerName) {
             TennisPoint currentScore = gameScore.get(playerName);
+            updateFinishedStatus(playerName);
 
             if (currentScore == TennisPoint.LOVE) {
                 gameScore.put(playerName, TennisPoint.FIFTEEN);
@@ -60,24 +60,23 @@ public class GameScore implements ScoreCounter {
                 gameScore.put(playerName, TennisPoint.THIRTY);
             } else if (currentScore == TennisPoint.THIRTY) {
                 gameScore.put(playerName, TennisPoint.FORTY);
-            } else if (currentScore == TennisPoint.FORTY) {
+            } else if (currentScore == TennisPoint.FORTY || currentScore == TennisPoint.ADVANTAGE) {
                 handleAdvantage(playerName);
             }
-            updateFinishedStatus();
+
     }
 
     private void handleAdvantage(String playerName) {
         TennisPoint opponentScore = gameScore.get(getOpponentName(playerName));
 
         if (opponentScore == TennisPoint.FORTY) {
-            gameScore.put(playerName, TennisPoint.FORTY);
-            gameScore.put(getOpponentName(playerName), TennisPoint.FORTY);
+            gameScore.put(playerName, TennisPoint.ADVANTAGE);
         } else if (opponentScore == TennisPoint.ADVANTAGE) {
-            gameScore.put(playerName, TennisPoint.FORTY);
+            gameScore.put(playerName, TennisPoint.ADVANTAGE);
             gameScore.put(getOpponentName(playerName), TennisPoint.FORTY);
-        } else {
-            updateFinishedStatus();
         }
+
+
     }
 
     private String getOpponentName(String playerName) {
