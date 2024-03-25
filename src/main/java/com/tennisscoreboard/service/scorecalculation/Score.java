@@ -64,19 +64,18 @@ public class Score implements ScoreCounter {
 
 
     public void updateScore(String playerName) {
-        if (!isFinished) {
-            if (isGameFinished()) {
-                setScore.updateScore(playerName);
-                gameScore.initialize();
-                if (isSetFinished()) {
-                    matchScore.put(playerName, matchScore.get(playerName) + 1);
-                    updateFinishedStatus();
-                    setScore.initialize();
-                }
-            } else {
-                gameScore.updateScore(playerName);
+        gameScore.updateScore(playerName);
+
+        if (isGameFinished()) {
+            setScore.updateScore(playerName);
+            gameScore.initialize();
+            if (isSetFinished()) {
+                matchScore.put(playerName, matchScore.get(playerName) + 1);
+                updateFinishedStatus();
+                setScore.initialize();
             }
         }
+
     }
 
     public boolean isSetFinished() {
