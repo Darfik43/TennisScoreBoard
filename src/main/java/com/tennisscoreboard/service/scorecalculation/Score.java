@@ -73,24 +73,30 @@ public class Score implements ScoreCounter {
 
     public void updateScore(String playerName) {
 
-//        if (!isTieBreak) {
+        if (!isTieBreak) {
             gameScore.updateScore(playerName);
-            if (isGameFinished()) { //&& !isTieBreak) {
+            if (isGameFinished() && !isTieBreak) {
                 setScore.updateScore(playerName);
                 gameScore.initialize();
+                isTieBreak();
                 if (isSetFinished()) {
                     matchScore.put(playerName, matchScore.get(playerName) + 1);
                     updateFinishedStatus();
-                    //tieBreakScore.initialize();
+                    tieBreakScore.initialize();
                     setScore.initialize();
                 }
             }
-//        } else {
-//            tieBreakScore.updateScore(playerName);
-//            if (tieBreakScore.isTieBreakFinished()) {
-//                setScore.updateScore(playerName);
-//            }
+        } else {
+            tieBreakScore.updateScore(playerName);
+            if (tieBreakScore.isTieBreakFinished()) {
+                matchScore.put(playerName, matchScore.get(playerName) + 1);
+                tieBreakScore.initialize();
+                setScore.initialize();
+                isTieBreak();
+            }
         }
+    }
+
 
     public boolean isSetFinished() {
         return setScore.isFinished();
