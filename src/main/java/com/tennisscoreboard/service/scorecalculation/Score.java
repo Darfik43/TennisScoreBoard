@@ -1,8 +1,5 @@
 package com.tennisscoreboard.service.scorecalculation;
 
-import com.tennisscoreboard.model.Match;
-import com.tennisscoreboard.model.Player;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +10,6 @@ public class Score implements ScoreCounter {
     private final Map<String, Integer> matchScore;
     private final TieBreakScore tieBreakScore;
     private boolean isFinished;
-    private boolean isTieBreak;
     private final String player1Name;
     private final String player2Name;
 
@@ -28,12 +24,12 @@ public class Score implements ScoreCounter {
     }
 
     @Override
-    public void initialize() {
+    public void startNew() {
         matchScore.put(player1Name, 0);
         matchScore.put(player2Name, 0);
-        setScore.initialize();
-        tieBreakScore.initialize();
-        gameScore.initialize();
+        setScore.startNew();
+        tieBreakScore.startNew();
+        gameScore.startNew();
         isFinished = false;
     }
 
@@ -46,7 +42,7 @@ public class Score implements ScoreCounter {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean getIsFinished() {
         return isFinished;
     }
 
@@ -72,42 +68,49 @@ public class Score implements ScoreCounter {
 
 
     public void updateScore(String playerName) {
-
-        if (!isTieBreak) {
-            gameScore.updateScore(playerName);
-            if (isGameFinished() && !isTieBreak) {
-                setScore.updateScore(playerName);
-                gameScore.initialize();
-                isTieBreak();
-                if (isSetFinished()) {
-                    matchScore.put(playerName, matchScore.get(playerName) + 1);
-                    updateFinishedStatus();
-                    tieBreakScore.initialize();
-                    setScore.initialize();
-                }
-            }
+        if (!setScore.getIsTieBreak()) {
+            updateGameScore(playerName);
         } else {
-            tieBreakScore.updateScore(playerName);
-            if (tieBreakScore.isTieBreakFinished()) {
-                matchScore.put(playerName, matchScore.get(playerName) + 1);
-                tieBreakScore.initialize();
-                setScore.initialize();
-                isTieBreak();
-            }
+            updateTieBreakScore(playerName);
         }
+    }
+
+    private void updateGameScore(String playerName) {
+        gameScore.updateScore(playerName);
+        if (gameScore.getIsFinished()) {
+            endGameAndUpdateMatch(playerName);
+        }
+    }
+
+    private void endGameAndUpdateMatch(String playerName) {
+        setScore.updateScore(playerName);
+        gameScore.startNew();
+
+        if (setScore.getIsFinished()) {
+            endSetAndUpdateMatch(playerName);
+            updateFinishedStatus();
+        }
+    }
+
+    private void updateTieBreakScore(String playerName) {
+        tieBreakScore.updateScore(playerName);
+        if (tieBreakScore.getIsFinished()) {
+            endSetAndUpdateMatch(playerName);
+        }
+    }
+
+    private void endSetAndUpdateMatch(String playerName) {
+        matchScore.put(playerName, matchScore.get(playerName) + 1);
+        tieBreakScore.startNew();
+        setScore.startNew();
     }
 
 
     public boolean isSetFinished() {
-        return setScore.isFinished();
+        return setScore.getIsFinished();
     }
 
     public boolean isGameFinished() {
-        return gameScore.isFinished();
-    }
-
-    private void isTieBreak() {
-        isTieBreak = setScore.getScore().get(player1Name) == 6
-                && setScore.getScore().get(player2Name) == 6;
+        return gameScore.getIsFinished();
     }
 }

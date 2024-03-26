@@ -19,7 +19,7 @@ public class TieBreakScore implements ScoreCounter {
 
 
     @Override
-    public void initialize() {
+    public void startNew() {
         tieBreakScore.put(player1Name, 0);
         tieBreakScore.put(player2Name, 0);
         isFinished = false;
@@ -34,7 +34,7 @@ public class TieBreakScore implements ScoreCounter {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean getIsFinished() {
         return isFinished;
     }
 
@@ -45,10 +45,8 @@ public class TieBreakScore implements ScoreCounter {
 
     @Override
     public void updateScore(String playerName) {
-        if (!isFinished) {
             tieBreakScore.put(playerName, tieBreakScore.get(playerName) + 1);
             updateFinishedStatus();
-        }
     }
 
 

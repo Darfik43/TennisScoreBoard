@@ -1,12 +1,9 @@
 package com.tennisscoreboard.service.scorecalculation;
 
-import java.util.Map;
-import java.util.Optional;
-
 public interface  ScoreCounter {
-    void initialize();
+    void startNew();
     void player1WinsPoint();
     void player2WinsPoint();
-    boolean isFinished();
+    boolean getIsFinished();
     void updateScore(String playerName);
 }

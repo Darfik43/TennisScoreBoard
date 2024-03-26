@@ -20,7 +20,7 @@ public class GameScore implements ScoreCounter {
 
 
     @Override
-    public void initialize() {
+    public void startNew() {
         gameScore.put(player1Name, TennisPoint.LOVE);
         gameScore.put(player2Name, TennisPoint.LOVE);
         this.isFinished = false;
@@ -35,7 +35,7 @@ public class GameScore implements ScoreCounter {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean getIsFinished() {
         return isFinished;
     }
 

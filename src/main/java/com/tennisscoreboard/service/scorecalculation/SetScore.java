@@ -11,20 +11,23 @@ public class SetScore implements ScoreCounter {
     private final String player2Name;
     private TieBreakScore tieBreakScore;
     private boolean isFinished;
+    private boolean isTieBreak;
 
     public SetScore(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.setScore = new HashMap<>();
         this.isFinished = false;
+        this.isTieBreak = false;
     }
 
 
     @Override
-    public void initialize() {
+    public void startNew() {
         setScore.put(player1Name, 0);
         setScore.put(player2Name, 0);
         isFinished = false;
+        isTieBreak = false;
     }
 
     public void player1WinsPoint() {
@@ -36,7 +39,7 @@ public class SetScore implements ScoreCounter {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean getIsFinished() {
         return isFinished;
     }
 
@@ -52,12 +55,21 @@ public class SetScore implements ScoreCounter {
     @Override
     public void updateScore(String playerName) {
         setScore.put(playerName, setScore.get(playerName) + 1);
+        setTieBreakStatus();
         updateFinishedStatus();
     }
 
+    private void setTieBreakStatus() {
+        isTieBreak = getScore().get(player1Name) == 6
+                && getScore().get(player2Name) == 6;
+    }
+
+    public boolean getIsTieBreak() {
+        return isTieBreak;
+    }
 
     private void startTieBreak() {
         this.tieBreakScore = new TieBreakScore(player1Name, player2Name);
-        tieBreakScore.initialize();
+        tieBreakScore.startNew();
     }
 }

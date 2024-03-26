@@ -1,10 +1,8 @@
 package com.tennisscoreboard.service.scorecalculation;
 
-import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
 import lombok.Getter;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -28,7 +26,7 @@ public class MatchManager {
     }
 
     public void initNewMatch() {
-        score.initialize();
+        score.startNew();
     }
 
     public void playerWonPoint(String playerName) {
