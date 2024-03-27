@@ -35,6 +35,7 @@ public class SetScoreTest {
         setScore.updateScore("Player1");
         Map<String, Integer> score = setScore.getScore();
         assertEquals(1, (int) score.get("Player1"));
+        assertEquals(0, (int) score.get("Player2"));
         assertFalse(setScore.isFinished);
         assertFalse(setScore.isTieBreak);
     }
