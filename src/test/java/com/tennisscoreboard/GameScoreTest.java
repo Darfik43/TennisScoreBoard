@@ -15,11 +15,11 @@ public class GameScoreTest {
     @BeforeEach
     void setUp() {
         gameScore = new GameScore("Player1", "Player2");
-        gameScore.startNew();
     }
 
     @Test
     void startNewGame() {
+        gameScore.startNew();
         Map<String, TennisPoint> score = gameScore.getScore();
         assertEquals(TennisPoint.LOVE, score.get("Player1"));
         assertEquals(TennisPoint.LOVE, score.get("Player2"));
@@ -28,6 +28,8 @@ public class GameScoreTest {
 
     @Test
     void updateScoreLoveToFifteen() {
+        gameScore.startNew();
+
         gameScore.updateScore("Player1");
         Map<String, TennisPoint> score = gameScore.getScore();
         assertEquals(TennisPoint.FIFTEEN, score.get("Player1"));
@@ -36,6 +38,8 @@ public class GameScoreTest {
 
     @Test
     void updateScoreFortyToAdvantage() {
+        gameScore.startNew();
+
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player1");
@@ -51,6 +55,8 @@ public class GameScoreTest {
 
     @Test
     void updateScorePlayer1Wins() {
+        gameScore.startNew();
+
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player1");
@@ -62,6 +68,8 @@ public class GameScoreTest {
 
     @Test
     void isFinishedAfterPlayer2WinsAdvantage() {
+        gameScore.startNew();
+
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player1");
@@ -76,6 +84,8 @@ public class GameScoreTest {
 
     @Test
     void swapAdvantagePoints() {
+        gameScore.startNew();
+
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player1");
