@@ -40,12 +40,4 @@ public class TieBreakScore implements ScoreCounter {
     public Map<String, Integer> getTieBreakScore() {
         return new HashMap<>(tieBreakScore);
     }
-
-    public boolean isTieBreakFinished() {
-        int player1TieBreakScore = tieBreakScore.get(player1Name);
-        int player2TieBreakScore = tieBreakScore.get(player2Name);
-
-        return (Math.abs(player1TieBreakScore - player2TieBreakScore) >= 2)
-                && (player1TieBreakScore >= 7 || player2TieBreakScore >= 7);
-    }
 }

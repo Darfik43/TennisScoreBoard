@@ -73,9 +73,8 @@ public class Score implements ScoreCounter {
         setScore.updateScore(playerName);
         gameScore.startNew();
 
-        if (setScore.isTieBreak) {
-            updateTieBreakScore(playerName);
-            updateFinishedStatus();
+        if (setScore.isFinished) {
+            endSetAndUpdateMatch(playerName);
         }
     }
 
