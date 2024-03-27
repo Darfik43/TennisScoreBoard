@@ -3,13 +3,12 @@ package com.tennisscoreboard.service.scorecalculation;
 import java.util.HashMap;
 import java.util.Map;
 
-//Score(MatchScore) - Score of sets within a Match
 public class Score implements ScoreCounter {
     private final SetScore setScore;
     private final GameScore gameScore;
     private final Map<String, Integer> matchScore;
     private final TieBreakScore tieBreakScore;
-    private boolean isFinished;
+    public boolean isFinished;
     private final String player1Name;
     private final String player2Name;
 
@@ -53,6 +52,11 @@ public class Score implements ScoreCounter {
         return tieBreakScore.getTieBreakScore();
     }
 
+    private void updateMatchScoreAndResetSet(String playerName) {
+        matchScore.put(playerName, matchScore.get(playerName) + 1);
+        setScore.startNew();
+    }
+
 
     public void updateScore(String playerName) {
         if (!setScore.isTieBreak) {
@@ -86,8 +90,7 @@ public class Score implements ScoreCounter {
     }
 
     private void endSetAndUpdateMatch(String playerName) {
-        matchScore.put(playerName, matchScore.get(playerName) + 1);
+        updateMatchScoreAndResetSet(playerName);
         tieBreakScore.startNew();
-        setScore.startNew();
     }
 }
