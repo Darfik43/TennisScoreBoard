@@ -33,19 +33,6 @@ public class Score implements ScoreCounter {
         isFinished = false;
     }
 
-    public void player1WinsPoint() {
-        updateScore(player1Name);
-    }
-
-    public void player2WinsPoint() {
-        updateScore(player2Name);
-    }
-
-    @Override
-    public boolean getIsFinished() {
-        return isFinished;
-    }
-
     private void updateFinishedStatus() {
         isFinished = matchScore.get(player1Name) == 2 || matchScore.get(player2Name) == 2;
     }
@@ -68,7 +55,7 @@ public class Score implements ScoreCounter {
 
 
     public void updateScore(String playerName) {
-        if (!setScore.getIsTieBreak()) {
+        if (!setScore.isTieBreak) {
             updateGameScore(playerName);
         } else {
             updateTieBreakScore(playerName);
@@ -77,7 +64,7 @@ public class Score implements ScoreCounter {
 
     private void updateGameScore(String playerName) {
         gameScore.updateScore(playerName);
-        if (gameScore.getIsFinished()) {
+        if (gameScore.isFinished) {
             endGameAndUpdateMatch(playerName);
         }
     }
@@ -86,7 +73,7 @@ public class Score implements ScoreCounter {
         setScore.updateScore(playerName);
         gameScore.startNew();
 
-        if (setScore.getIsFinished()) {
+        if (setScore.isTieBreak) {
             endSetAndUpdateMatch(playerName);
             updateFinishedStatus();
         }
@@ -94,7 +81,7 @@ public class Score implements ScoreCounter {
 
     private void updateTieBreakScore(String playerName) {
         tieBreakScore.updateScore(playerName);
-        if (tieBreakScore.getIsFinished()) {
+        if (tieBreakScore.isFinished) {
             endSetAndUpdateMatch(playerName);
         }
     }
@@ -103,14 +90,5 @@ public class Score implements ScoreCounter {
         matchScore.put(playerName, matchScore.get(playerName) + 1);
         tieBreakScore.startNew();
         setScore.startNew();
-    }
-
-
-    public boolean isSetFinished() {
-        return setScore.getIsFinished();
-    }
-
-    public boolean isGameFinished() {
-        return gameScore.getIsFinished();
     }
 }

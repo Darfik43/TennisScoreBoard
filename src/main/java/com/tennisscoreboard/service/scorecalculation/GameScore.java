@@ -9,7 +9,7 @@ public class GameScore implements ScoreCounter {
     private final Map<String, TennisPoint> gameScore;
     private final String player1Name;
     private final String player2Name;
-    private boolean isFinished;
+    public boolean isFinished;
 
     public GameScore(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -26,18 +26,7 @@ public class GameScore implements ScoreCounter {
         this.isFinished = false;
     }
 
-    public void player1WinsPoint() {
-        updateScore(player1Name);
-    }
 
-    public void player2WinsPoint() {
-        updateScore(player2Name);
-    }
-
-    @Override
-    public boolean getIsFinished() {
-        return isFinished;
-    }
 
     private void updateFinishedStatus(String playerName) {
         TennisPoint playerGameScore = gameScore.get(playerName);

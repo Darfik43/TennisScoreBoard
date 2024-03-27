@@ -7,7 +7,7 @@ public class TieBreakScore implements ScoreCounter {
     private final Map<String, Integer> tieBreakScore;
     private final String player1Name;
     private final String player2Name;
-    private boolean isFinished;
+    public boolean isFinished;
 
     public TieBreakScore(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -23,19 +23,6 @@ public class TieBreakScore implements ScoreCounter {
         tieBreakScore.put(player1Name, 0);
         tieBreakScore.put(player2Name, 0);
         isFinished = false;
-    }
-
-    public void player1WinsPoint() {
-        updateScore(player1Name);
-    }
-
-    public void player2WinsPoint() {
-        updateScore(player2Name);
-    }
-
-    @Override
-    public boolean getIsFinished() {
-        return isFinished;
     }
 
     private void updateFinishedStatus() {
