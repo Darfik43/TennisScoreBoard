@@ -55,6 +55,7 @@ public class Score implements ScoreCounter {
     private void updateMatchScoreAndResetSet(String playerName) {
         matchScore.put(playerName, matchScore.get(playerName) + 1);
         setScore.startNew();
+        updateFinishedStatus();
     }
 
 
