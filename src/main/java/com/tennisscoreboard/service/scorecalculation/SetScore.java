@@ -36,7 +36,7 @@ public class SetScore implements ScoreCounter {
     @Override
     public void updateScore(String playerName) {
         setScore.put(playerName, setScore.get(playerName) + 1);
-        setTieBreakStatus();
+        updateTieBreakStatus();
         updateFinishedStatus();
     }
 
@@ -44,7 +44,7 @@ public class SetScore implements ScoreCounter {
         isFinished = ((Math.abs(setScore.get(player1Name) - setScore.get(player2Name))) >= 2)
                 && (setScore.get(player1Name) == 7 || setScore.get(player2Name) == 7);
     }
-    private void setTieBreakStatus() {
+    private void updateTieBreakStatus() {
         isTieBreak = getScore().get(player1Name) == 6
                 && getScore().get(player2Name) == 6;
     }
