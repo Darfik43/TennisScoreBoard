@@ -9,7 +9,6 @@ public class SetScore implements ScoreCounter {
     private final Map<String, Integer> setScore;
     private final String player1Name;
     private final String player2Name;
-    private TieBreakScore tieBreakScore;
     private boolean isFinished;
     private boolean isTieBreak;
 
@@ -38,15 +37,7 @@ public class SetScore implements ScoreCounter {
         updateScore(player2Name);
     }
 
-    @Override
-    public boolean getIsFinished() {
-        return isFinished;
-    }
 
-    private void updateFinishedStatus() {
-        isFinished = ((Math.abs(setScore.get(player1Name) - setScore.get(player2Name))) >= 2)
-                && (setScore.get(player1Name) == 7 || setScore.get(player2Name) == 7);
-    }
 
     public Map<String, Integer> getScore() {
         return setScore;
@@ -59,6 +50,14 @@ public class SetScore implements ScoreCounter {
         updateFinishedStatus();
     }
 
+    private void updateFinishedStatus() {
+        isFinished = ((Math.abs(setScore.get(player1Name) - setScore.get(player2Name))) >= 2)
+                && (setScore.get(player1Name) == 7 || setScore.get(player2Name) == 7);
+    }
+    @Override
+    public boolean getIsFinished() {
+        return isFinished;
+    }
     private void setTieBreakStatus() {
         isTieBreak = getScore().get(player1Name) == 6
                 && getScore().get(player2Name) == 6;
@@ -66,10 +65,5 @@ public class SetScore implements ScoreCounter {
 
     public boolean getIsTieBreak() {
         return isTieBreak;
-    }
-
-    private void startTieBreak() {
-        this.tieBreakScore = new TieBreakScore(player1Name, player2Name);
-        tieBreakScore.startNew();
     }
 }
