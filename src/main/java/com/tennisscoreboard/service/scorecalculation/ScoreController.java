@@ -3,7 +3,7 @@ package com.tennisscoreboard.service.scorecalculation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Score implements ScoreCounter {
+public class ScoreController implements ScoreCounter {
     private final SetScore setScore;
     private final GameScore gameScore;
     private final Map<String, Integer> matchScore;
@@ -12,7 +12,7 @@ public class Score implements ScoreCounter {
     private final String player1Name;
     private final String player2Name;
 
-    public Score(String player1Name, String player2Name) {
+    public ScoreController(String player1Name, String player2Name) {
         this.matchScore = new HashMap<>();
         this.player1Name = player1Name;
         this.player2Name = player2Name;

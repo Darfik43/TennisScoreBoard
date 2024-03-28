@@ -9,7 +9,7 @@ import java.util.UUID;
 public class MatchManager {
 
     CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
-    private final Score score;
+    private final ScoreController scoreController;
     @Getter
     private final String player1Name;
     @Getter
@@ -18,7 +18,7 @@ public class MatchManager {
     public MatchManager(UUID uuid) {
         this.player1Name = currentMatchService.getCurrentMatch(uuid).getPlayer1().getName();
         this.player2Name = currentMatchService.getCurrentMatch(uuid).getPlayer2().getName();
-        this.score = new Score(player1Name, player2Name);
+        this.scoreController = new ScoreController(player1Name, player2Name);
     }
 
     public static MatchManager getInstance(UUID uuid) {
@@ -26,25 +26,25 @@ public class MatchManager {
     }
 
     public void initNewMatch() {
-        score.startNew();
+        scoreController.startNew();
     }
 
     public void playerWonPoint(String playerName) {
-        score.updateScore(playerName);
+        scoreController.updateScore(playerName);
     }
 
     public Map<String, Integer> getMatchScore() {
-        return score.getScore();
+        return scoreController.getScore();
     }
 
     public Map<String, Integer> getSetScore() {
-        return score.getSetScore();
+        return scoreController.getSetScore();
     }
 
     public Map<String, TennisPoint> getGameScore() {
-        return score.getGameScore();
+        return scoreController.getGameScore();
     }
     public Map<String, Integer> getTieBreakScore() {
-        return score.getTieBreakScore();
+        return scoreController.getTieBreakScore();
     }
 }
