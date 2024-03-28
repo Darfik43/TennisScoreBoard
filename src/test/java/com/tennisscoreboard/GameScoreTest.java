@@ -40,12 +40,12 @@ public class GameScoreTest {
     void updateScoreFortyToAdvantage() {
         gameScore.startNew();
 
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player2");
-        gameScore.updateScore("Player2");
-        gameScore.updateScore("Player2");
+        for (int i = 0; i < 3; i++) {
+            gameScore.updateScore("Player1");
+        }
+        for (int i = 0; i < 3; i++) {
+            gameScore.updateScore("Player2");
+        }
         gameScore.updateScore("Player1");
 
         Map<String, TennisPoint> score = gameScore.getScore();
