@@ -57,10 +57,9 @@ public class GameScoreTest {
     void updateScorePlayer1Wins() {
         gameScore.startNew();
 
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
+        for (int i = 0; i < 4; i++) {
+            gameScore.updateScore("Player1");
+        }
 
         Map<String, TennisPoint> score = gameScore.getScore();
         assertTrue(gameScore.isFinished);
@@ -70,15 +69,18 @@ public class GameScoreTest {
     void isFinishedAfterPlayer2WinsAdvantage() {
         gameScore.startNew();
 
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player2");
-        gameScore.updateScore("Player2");
-        gameScore.updateScore("Player2");
+
+        for (int i = 0; i < 3; i++) {
+            gameScore.updateScore("Player1");
+        }
+        for (int i = 0; i < 3; i++) {
+            gameScore.updateScore("Player2");
+        }
         gameScore.updateScore("Player2");
         gameScore.updateScore("Player2");
 
+        Map<String, TennisPoint> score = gameScore.getScore();
+        assertEquals(TennisPoint.ADVANTAGE, score.get("Player2"));
         assertTrue(gameScore.isFinished);
     }
 
@@ -86,12 +88,13 @@ public class GameScoreTest {
     void swapAdvantagePoints() {
         gameScore.startNew();
 
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player1");
-        gameScore.updateScore("Player2");
-        gameScore.updateScore("Player2");
-        gameScore.updateScore("Player2");
+        for (int i = 0; i < 3; i++) {
+            gameScore.updateScore("Player1");
+        }
+        for (int i = 0; i < 3; i++) {
+            gameScore.updateScore("Player2");
+        }
+
         gameScore.updateScore("Player1");
         gameScore.updateScore("Player2");
 
