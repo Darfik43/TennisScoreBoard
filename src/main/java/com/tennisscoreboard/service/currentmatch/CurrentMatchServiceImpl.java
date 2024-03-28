@@ -3,9 +3,6 @@ package com.tennisscoreboard.service.currentmatch;
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
 import com.tennisscoreboard.service.dao.MatchDao;
-import com.tennisscoreboard.service.scorecalculation.GameScore;
-import com.tennisscoreboard.service.scorecalculation.Score;
-import com.tennisscoreboard.service.scorecalculation.SetScore;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

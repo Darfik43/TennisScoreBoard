@@ -1,7 +1,5 @@
 package com.tennisscoreboard.model;
 
-import com.tennisscoreboard.model.Player;
-import com.tennisscoreboard.service.scorecalculation.Score;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
