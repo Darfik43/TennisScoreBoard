@@ -3,6 +3,7 @@ package com.tennisscoreboard.service.currentmatch;
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
 import com.tennisscoreboard.service.dao.MatchDao;
+import com.tennisscoreboard.service.dao.PlayerDao;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,6 +12,7 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
 
     private static final Map<UUID, Match> currentMatches = new ConcurrentHashMap<>();
     private final MatchDao matchDao = new MatchDao();
+    private final PlayerDao playerDao = new PlayerDao();
 
     public static CurrentMatchServiceImpl getInstance() {
         return new CurrentMatchServiceImpl();
@@ -39,6 +41,8 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
 
     @Override
     public void saveFinishedMatch(Match match) {
+        playerDao.create(match.getPlayer1());
+        playerDao.create(match.getPlayer2());
         matchDao.create(match);
     }
 }
