@@ -19,7 +19,7 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
 
     @Override
     public void startNewMatch(Player player1, Player player2, UUID uuid) {
-        Match match = new Match(player1, player2);
+        Match match = new Match(uuid, player1, player2);
         currentMatches.put(uuid, match);
     }
 

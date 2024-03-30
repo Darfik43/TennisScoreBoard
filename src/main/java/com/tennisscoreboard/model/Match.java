@@ -16,7 +16,6 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class Match {
         @Id
-        //@GeneratedValue(strategy = GenerationType.IDENTITY)
         private UUID id;
 
         @ManyToOne
@@ -31,7 +30,8 @@ public class Match {
         @JoinColumn(name = "winner_id", nullable = false)
         private Player winner;
 
-        public Match(Player player1, Player player2) {
+        public Match(UUID uuid, Player player1, Player player2) {
+                this.id = uuid;
                 this.player1 = player1;
                 this.player2 = player2;
         }
