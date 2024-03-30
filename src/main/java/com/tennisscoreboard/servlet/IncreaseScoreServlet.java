@@ -1,7 +1,5 @@
 package com.tennisscoreboard.servlet;
 
-import com.tennisscoreboard.model.Match;
-import com.tennisscoreboard.model.Player;
 import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
 import com.tennisscoreboard.service.scorecalculation.MatchManager;
 import jakarta.servlet.ServletException;
@@ -27,9 +25,9 @@ public class IncreaseScoreServlet extends HttpServlet {
 
                 String action = request.getParameter("action");
                 if ("player1".equals(action)) {
-                    matchManager.playerWonPoint(matchManager.getPlayer1Name());
+                    matchManager.playerWonPointAndCheckFinishedMatch(matchManager.getPlayer1Name());
                 } else if ("player2".equals(action)) {
-                    matchManager.playerWonPoint(matchManager.getPlayer2Name());
+                    matchManager.playerWonPointAndCheckFinishedMatch(matchManager.getPlayer2Name());
                 }
 
 
