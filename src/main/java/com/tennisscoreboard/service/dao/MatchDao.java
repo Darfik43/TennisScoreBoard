@@ -12,17 +12,17 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class MatchDao implements Dao<Match> {
 
 
 
-    @Override
-    public Optional<Match> getById(Long id) {
+    public Optional<Match> getById(UUID uuid) {
         Match match = null;
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
             session.beginTransaction();
-            match = session.get(Match.class, id);
+            match = session.get(Match.class, uuid);
             session.getTransaction().commit();
         } catch (HibernateError e) {
             System.out.println("This match doesn't exist");

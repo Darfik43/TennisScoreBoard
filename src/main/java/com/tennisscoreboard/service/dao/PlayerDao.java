@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class PlayerDao implements Dao<Player> {
 
-    @Override
     public Optional<Player> getById(Long id) {
         Player player = null;
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
