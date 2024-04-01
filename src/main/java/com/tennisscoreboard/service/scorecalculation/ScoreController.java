@@ -52,6 +52,22 @@ public class ScoreController implements ScoreCounter {
         return tieBreakScore.getTieBreakScore();
     }
 
+    public Integer getPlayerTieBreakScore(String playerName) {
+        return tieBreakScore.getPlayerTieBreakScore(playerName);
+    }
+
+    public Integer getPlayerGameScore(String playerName) {
+        return gameScore.getPlayerGameScore(playerName);
+    }
+
+    public Integer getPlayerSetScore(String playerName) {
+        return setScore.getPlayerSetScore(playerName);
+    }
+
+    public Integer getPlayerMatchScore(String playerName) {
+        return matchScore.get(playerName);
+    }
+
     private void updateMatchScoreAndResetSet(String playerName) {
         matchScore.put(playerName, matchScore.get(playerName) + 1);
         setScore.startNew();

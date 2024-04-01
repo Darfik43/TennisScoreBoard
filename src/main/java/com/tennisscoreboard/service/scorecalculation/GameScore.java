@@ -75,6 +75,10 @@ public class GameScore implements ScoreCounter {
     public Map<String, TennisPoint> getGameScore() {
         return gameScore;
     }
+
+    public Integer getPlayerGameScore(String playerName) {
+        return gameScore.get(playerName).getValue();
+    }
 }
 
 

@@ -43,20 +43,20 @@ public class MatchManager {
         }
     }
 
-    public Map<String, Integer> getMatchScore() {
-        return scoreController.getScore();
+    public Integer getPlayerMatchScore(String playerName) {
+        return scoreController.getPlayerMatchScore(playerName);
     }
 
-    public Map<String, Integer> getSetScore() {
-        return scoreController.getSetScore();
+    public Integer getPlayerSetScore(String playerName) {
+        return scoreController.getPlayerSetScore(playerName);
     }
 
-    public Map<String, TennisPoint> getGameScore() {
-        return scoreController.getGameScore();
+    public Integer getPlayerGameScore(String playerName) {
+        return scoreController.getPlayerGameScore(playerName);
     }
 
-    public Map<String, Integer> getTieBreakScore() {
-        return scoreController.getTieBreakScore();
+    public Integer getPlayerTieBreakScore(String playerName) {
+        return scoreController.getPlayerTieBreakScore(playerName);
     }
 
     private void setWinner(String playerName) {

@@ -33,6 +33,10 @@ public class SetScore implements ScoreCounter {
         return setScore;
     }
 
+    public Integer getPlayerSetScore(String playerName) {
+        return setScore.get(playerName);
+    }
+
     @Override
     public void updateScore(String playerName) {
         setScore.put(playerName, setScore.get(playerName) + 1);

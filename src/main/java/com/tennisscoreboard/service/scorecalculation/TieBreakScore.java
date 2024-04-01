@@ -40,4 +40,8 @@ public class TieBreakScore implements ScoreCounter {
     public Map<String, Integer> getTieBreakScore() {
         return new HashMap<>(tieBreakScore);
     }
+
+    public Integer getPlayerTieBreakScore(String playerName) {
+        return tieBreakScore.get(playerName);
+    }
 }
