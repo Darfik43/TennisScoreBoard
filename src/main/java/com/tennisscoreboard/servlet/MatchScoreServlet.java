@@ -21,7 +21,7 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UUID uuid = UUID.fromString(req.getSession().getAttribute("matchId").toString());
 
-        MatchManager matchManager = (MatchManager) req.getSession().getAttribute("matchManager");
+        MatchManager matchManager = (MatchManager) req.getSession().getAttribute(uuid.toString());
 
         req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
         req.setAttribute("player1Name", matchManager.getPlayer1Name());
@@ -35,8 +35,7 @@ public class MatchScoreServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UUID uuid = UUID.fromString(req.getSession().getAttribute("matchId").toString());
-        MatchManager matchManager = MatchManager.getInstance(uuid);
-        matchManager.initNewMatch();
+        MatchManager matchManager = (MatchManager) req.getSession().getAttribute(uuid.toString());
 
         String action = req.getParameter("action");
         if ("player1".equals(action)) {

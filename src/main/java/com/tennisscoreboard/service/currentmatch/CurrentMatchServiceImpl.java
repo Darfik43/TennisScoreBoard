@@ -10,12 +10,18 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class CurrentMatchServiceImpl implements CurrentMatchService {
 
+    private static CurrentMatchServiceImpl currentMatchService;
     private static final Map<UUID, Match> currentMatches = new ConcurrentHashMap<>();
     private final MatchDao matchDao = new MatchDao();
     private final PlayerDao playerDao = new PlayerDao();
 
     public static CurrentMatchServiceImpl getInstance() {
-        return new CurrentMatchServiceImpl();
+
+        if (currentMatchService == null) {
+            currentMatchService = new CurrentMatchServiceImpl();
+        }
+
+        return currentMatchService;
     }
 
 

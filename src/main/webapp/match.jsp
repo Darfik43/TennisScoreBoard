@@ -73,7 +73,7 @@
     UUID matchId = (UUID) request.getSession().getAttribute("matchId");
     String player1Name = (String) request.getAttribute("player1Name");
     String player2Name = (String) request.getAttribute("player2Name");
-    MatchManager matchManager = (MatchManager) request.getSession().getAttribute("matchManager");
+    MatchManager matchManager = (MatchManager) request.getSession().getAttribute(matchId.toString());
 %>
 
 <% if (matchId != null) { %>

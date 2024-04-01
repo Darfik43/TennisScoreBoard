@@ -21,7 +21,7 @@ public class IncreaseScoreServlet extends HttpServlet {
         if (matchIdParam != null) {
             UUID uuid = UUID.fromString(matchIdParam);
             try {
-                MatchManager matchManager = (MatchManager) request.getSession().getAttribute("matchManager");
+                MatchManager matchManager = (MatchManager) request.getSession().getAttribute(uuid.toString());
 
                 String action = request.getParameter("action");
                 if ("player1".equals(action)) {
@@ -32,7 +32,7 @@ public class IncreaseScoreServlet extends HttpServlet {
 
 
 
-                response.sendRedirect("match-score");
+                response.sendRedirect("match-score?matchId=" + uuid);
                 return;
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
