@@ -19,33 +19,10 @@ public class MatchScoreServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UUID uuid = UUID.fromString(req.getSession().getAttribute("matchId").toString());
+        UUID uuid = UUID.fromString(req.getParameter("matchId"));
 
         MatchManager matchManager = (MatchManager) req.getSession().getAttribute(uuid.toString());
 
-        req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
-        req.setAttribute("player1Name", matchManager.getPlayer1Name());
-        req.setAttribute("player2Name", matchManager.getPlayer2Name());
-        //req.setAttribute("score", matchManager.getMatchScore());
-
-
-        req.getRequestDispatcher("match.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UUID uuid = UUID.fromString(req.getSession().getAttribute("matchId").toString());
-        MatchManager matchManager = (MatchManager) req.getSession().getAttribute(uuid.toString());
-
-        String action = req.getParameter("action");
-        if ("player1".equals(action)) {
-            matchManager.playerWonPointAndCheckFinishedMatch(matchManager.getPlayer1Name());
-        } else if ("player2".equals(action)) {
-            matchManager.playerWonPointAndCheckFinishedMatch(matchManager.getPlayer2Name());
-        }
-
-        req.setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
-        req.setAttribute("matchId", uuid);
         req.getRequestDispatcher("match.jsp").forward(req, resp);
     }
 }

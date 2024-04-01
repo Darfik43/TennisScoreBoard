@@ -14,8 +14,6 @@ import java.util.UUID;
 @WebServlet("/increaseScore")
 public class IncreaseScoreServlet extends HttpServlet {
 
-    private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String matchIdParam = request.getParameter("matchId");
         if (matchIdParam != null) {
@@ -37,10 +35,7 @@ public class IncreaseScoreServlet extends HttpServlet {
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             }
-            request.getSession().setAttribute("currentMatch", currentMatchService.getCurrentMatch(uuid));
-            request.getSession().setAttribute("matchId", uuid);
         }
-
         response.sendRedirect(request.getContextPath() + "/error.jsp");
     }
 }

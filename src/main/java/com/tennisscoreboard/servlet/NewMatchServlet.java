@@ -20,10 +20,6 @@ public class NewMatchServlet extends HttpServlet {
 
     private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("new-match.jsp").forward(request, response);
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String player1Name = request.getParameter("player1Name");
         String player2Name = request.getParameter("player2Name");
@@ -39,10 +35,6 @@ public class NewMatchServlet extends HttpServlet {
         matchManager.initNewMatch();
 
         request.getSession().setAttribute(uuid.toString(), matchManager);
-        request.setAttribute("player1Name", matchManager.getPlayer1Name());
-        request.setAttribute("player2Name", matchManager.getPlayer2Name());
-        request.setAttribute("matchId,", uuid);
-        request.getSession().setAttribute("matchId", uuid);
         response.sendRedirect("match-score?matchId=" + uuid);
     }
 }
