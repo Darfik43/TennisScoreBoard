@@ -28,8 +28,6 @@ public class IncreaseScoreServlet extends HttpServlet {
                     matchManager.playerWonPointAndCheckFinishedMatch(matchManager.getPlayer2Name());
                 }
 
-
-
                 response.sendRedirect("match-score?matchId=" + uuid);
                 return;
             } catch (IllegalArgumentException e) {
