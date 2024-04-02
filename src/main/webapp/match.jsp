@@ -24,19 +24,15 @@
 
 <%
     UUID matchId = UUID.fromString(request.getParameter("matchId"));
-    MatchManager matchManager = (MatchManager) request.getSession().getAttribute(matchId.toString());
-    String player1Name =  matchManager.getPlayer1Name();
-    String player2Name =  matchManager.getPlayer2Name();
 %>
 
 <% if (matchId != null) { %>
 <h2>Match Details</h2>
-<p>Player 1: <%= player1Name %></p>
-<p>Player 2: <%= player2Name %></p>
+<p>Player 1: <%= request.getAttribute("player1Name") %></p>
+<p>Player 2: <%= request.getAttribute("player2Name") %></p>
 <% } %>
 
 <h2>Current Score</h2>
-<% if (matchManager != null) { %>
 <table>
     <tr>
         <th></th>
@@ -46,21 +42,20 @@
         <th>Tie Break Score</th>
     </tr>
     <tr>
-        <td><%= player1Name %></td>
-        <td><%= matchManager.getPlayerMatchScore(player1Name) %></td>
-        <td><%= matchManager.getPlayerSetScore(player1Name) %></td>
-        <td><%= matchManager.getPlayerGameScore(player1Name) %></td>
-        <td><%= matchManager.getPlayerTieBreakScore(player1Name) %></td>
+        <td><%= request.getAttribute("player1Name") %></td>
+        <td><%= request.getAttribute("player1MatchScore") %></td>
+        <td><%= request.getAttribute("player1SetScore") %></td>
+        <td><%= request.getAttribute("player1GameScore") %></td>
+        <td><%= request.getAttribute("player1TieBreakScore") %></td>
     </tr>
     <tr>
-        <td><%= player2Name %></td>
-        <td><%= matchManager.getPlayerMatchScore(player2Name) %></td>
-        <td><%= matchManager.getPlayerSetScore(player2Name) %></td>
-        <td><%= matchManager.getPlayerGameScore(player2Name) %></td>
-        <td><%= matchManager.getPlayerTieBreakScore(player2Name) %></td>
+        <td><%= request.getAttribute("player2Name") %></td>
+        <td><%= request.getAttribute("player2MatchScore") %></td>
+        <td><%= request.getAttribute("player2SetScore") %></td>
+        <td><%= request.getAttribute("player2GameScore") %></td>
+        <td><%= request.getAttribute("player2TieBreakScore") %></td>
     </tr>
 </table>
-<% } %>
 
 <form action="increaseScore?matchId=<%= matchId %>" method="post">
     <input type="hidden" name="matchId" value="<%= request.getParameter("matchId") %>">

@@ -68,4 +68,8 @@ public class MatchManager {
                     setWinner(currentMatchService.getCurrentMatch(uuid).getPlayer2());
         }
     }
+
+    public boolean checkIsFinished() {
+        return scoreController.isFinished;
+    }
 }

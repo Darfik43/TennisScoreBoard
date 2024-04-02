@@ -17,7 +17,6 @@
     <label for="player2Name">Player 2 Name:</label>
     <input type="text" id="player2Name" name="player2Name" required>
     <br>
-    <input type="hidden" name="matchId" value="<%= UUID.randomUUID() %>">
     <input type="submit" value="Start Match">
 </form>
 

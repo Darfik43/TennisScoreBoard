@@ -22,6 +22,20 @@ public class MatchScoreServlet extends HttpServlet {
         UUID uuid = UUID.fromString(req.getParameter("matchId"));
 
         MatchManager matchManager = (MatchManager) req.getSession().getAttribute(uuid.toString());
+        String player1Name =  matchManager.getPlayer1Name();
+        String player2Name =  matchManager.getPlayer2Name();
+
+        req.setAttribute("player1Name", player1Name);
+        req.setAttribute("player2Name", player2Name);
+        req.setAttribute("player1MatchScore", matchManager.getPlayerMatchScore(player1Name));
+        req.setAttribute("player1SetScore", matchManager.getPlayerSetScore(player1Name));
+        req.setAttribute("player1GameScore", matchManager.getPlayerGameScore(player1Name));
+        req.setAttribute("player1TieBreakScore", matchManager.getPlayerTieBreakScore(player1Name));
+        req.setAttribute("player2MatchScore", matchManager.getPlayerMatchScore(player2Name));
+        req.setAttribute("player2SetScore", matchManager.getPlayerSetScore(player2Name));
+        req.setAttribute("player2GameScore", matchManager.getPlayerGameScore(player2Name));
+        req.setAttribute("player2TieBreakScore", matchManager.getPlayerTieBreakScore(player2Name));
+
 
         req.getRequestDispatcher("match.jsp").forward(req, resp);
     }
