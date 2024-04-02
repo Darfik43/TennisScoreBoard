@@ -17,7 +17,6 @@ import java.util.UUID;
 public class MatchDao implements Dao<Match> {
 
 
-
     public Optional<Match> getById(UUID uuid) {
         Match match = null;
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
