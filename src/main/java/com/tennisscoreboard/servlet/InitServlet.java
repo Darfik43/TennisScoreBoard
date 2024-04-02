@@ -1,16 +1,16 @@
 package com.tennisscoreboard.servlet;
 
-import com.tennisscoreboard.AppStartData;
+import com.tennisscoreboard.AppStartService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 
 @WebServlet(value = "/init", loadOnStartup = 1)
 public class InitServlet extends HttpServlet {
 
-    private final AppStartData appStartData = new AppStartData();
+    private final AppStartService appStartService = new AppStartService();
     @Override
     public void init() {
-        appStartData.createStartPlayers();
-        appStartData.createStartMatches();
+        appStartService.createStartPlayers();
+        appStartService.createStartMatches();
     }
 }

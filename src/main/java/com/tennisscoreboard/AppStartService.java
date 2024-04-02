@@ -5,10 +5,9 @@ import com.tennisscoreboard.model.Player;
 import com.tennisscoreboard.service.dao.MatchDao;
 import com.tennisscoreboard.service.dao.PlayerDao;
 
-import java.util.Optional;
 import java.util.UUID;
 
-public class AppStartData {
+public class AppStartService {
 
     String[] playersNames = {
             "Rinky Hijikata", "Christopher Eubanks", "Duje Ajdukovic", "Brandon Nakashima", "Jaime Faria",
