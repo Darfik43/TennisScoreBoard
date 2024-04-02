@@ -2,6 +2,7 @@ package com.tennisscoreboard.service.dao;
 
 import com.tennisscoreboard.DatabaseHandler;
 import com.tennisscoreboard.model.Match;
+import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -16,6 +17,15 @@ import java.util.UUID;
 
 public class MatchDao implements Dao<Match> {
 
+    private static MatchDao matchDao;
+    public static MatchDao getInstance() {
+
+        if (matchDao == null) {
+            matchDao = new MatchDao();
+        }
+
+        return matchDao;
+    }
 
     public Optional<Match> getById(UUID uuid) {
         Match match = null;

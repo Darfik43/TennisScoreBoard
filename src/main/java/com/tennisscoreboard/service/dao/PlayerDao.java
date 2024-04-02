@@ -11,6 +11,16 @@ import java.util.Optional;
 
 public class PlayerDao implements Dao<Player> {
 
+    private static PlayerDao playerDao;
+    public static PlayerDao getInstance() {
+
+        if (playerDao == null) {
+            playerDao = new PlayerDao();
+        }
+
+        return playerDao;
+    }
+
     public Optional<Player> getById(Long id) {
         Player player = null;
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
@@ -23,13 +33,17 @@ public class PlayerDao implements Dao<Player> {
         return Optional.ofNullable(player);
     }
 
-//    @Override
-//    public Player getPlayerByName(String playerName) {
-//        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
-//            return session.createQuery("FROM Player WHERE name = :name ", Player.class)
-//                    .setParameter("name", playerName).uniqueResult();
-//        }
-//    }
+    public Optional<Player> getPlayerByName(String playerName) {
+        Player player = null;
+        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            player = session.get(Player.class, playerName);
+            session.getTransaction().commit();
+        } catch (HibernateError e) {
+            System.out.println("This player doesn't exist");
+        }
+        return Optional.ofNullable(player);
+    }
 
     @Override
     public void create(Player player) {

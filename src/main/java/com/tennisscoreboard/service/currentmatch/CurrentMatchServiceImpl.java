@@ -12,8 +12,8 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
 
     private static CurrentMatchServiceImpl currentMatchService;
     private static final Map<UUID, Match> currentMatches = new ConcurrentHashMap<>();
-    private final MatchDao matchDao = new MatchDao();
-    private final PlayerDao playerDao = new PlayerDao();
+    private final MatchDao matchDao = MatchDao.getInstance();
+    private final PlayerDao playerDao = PlayerDao.getInstance();
 
     public static CurrentMatchServiceImpl getInstance() {
 
