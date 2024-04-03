@@ -3,6 +3,7 @@ package com.tennisscoreboard.service.dao;
 import com.tennisscoreboard.DatabaseHandler;
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -37,6 +38,18 @@ public class MatchDao implements Dao<Match> {
             System.out.println("This match doesn't exist");
         }
         return Optional.ofNullable(match);
+    }
+
+    public List<Match> getPastMatches() {
+        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
+            String hql = "FROM Match WHERE winner IS NOT NULL";
+            Query query = session.createQuery(hql, Match.class);
+            return query.getResultList();
+        } catch (HibernateError e) {
+            e.printStackTrace();
+            //TODO
+            return null;
+        }
     }
 
     @Override

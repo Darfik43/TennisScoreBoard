@@ -1,4 +1,4 @@
-package com.tennisscoreboard;
+package com.tennisscoreboard.service;
 
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
@@ -9,15 +9,15 @@ import java.util.UUID;
 
 public class AppStartService {
 
-    String[] playersNames = {
+    private final String[] playersNames = {
             "Rinky Hijikata", "Christopher Eubanks", "Duje Ajdukovic", "Brandon Nakashima", "Jaime Faria",
             "D. Jorda Sanchis", "Dominik Koepfer", "Pablo Llamas Ruiz"
     };
-    Player[] players = new Player[playersNames.length];
-    MatchDao matchDao = MatchDao.getInstance();
-    PlayerDao playerDao = PlayerDao.getInstance();
-    Player player;
-    Match match;
+    private final Player[] players = new Player[playersNames.length];
+    private final MatchDao matchDao = MatchDao.getInstance();
+    private final PlayerDao playerDao = PlayerDao.getInstance();
+    private Player player;
+    private Match match;
 
     public void createStartPlayers() {
         for (int i = 0; i < playersNames.length; i++) {

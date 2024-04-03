@@ -12,7 +12,7 @@
 
 <a href="new-match.jsp">Create Match</a>
 <br>
-<a href="scoreboard.jsp">Scoreboard</a>
+<a href="${pageContext.request.contextPath}/results">Scoreboard</a>
 
 </body>
 </html>
