@@ -12,6 +12,7 @@ import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -38,6 +39,20 @@ public class MatchDao implements Dao<Match> {
             System.out.println("This match doesn't exist");
         }
         return Optional.ofNullable(match);
+    }
+
+    public List<Match> getMatchesByName(String playerName) {
+        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
+            String hql = "SELECT m FROM Match m JOIN m.player1 p1 JOIN m.player2 p2 JOIN m.winner w " +
+                    "WHERE p1.name = :name OR p2.name = :name";
+            Query query = session.createQuery(hql, Match.class);
+            query.setParameter("name", playerName);
+            return query.getResultList();
+        } catch (HibernateError e) {
+            e.printStackTrace();
+            System.out.println("Error message: " + e.getMessage()); //TODO
+            return null;
+        }
     }
 
     public List<Match> getPastMatches() {
