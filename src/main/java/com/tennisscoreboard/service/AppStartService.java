@@ -11,7 +11,7 @@ public class AppStartService {
 
     private final String[] playersNames = {
             "Rinky Hijikata", "Christopher Eubanks", "Duje Ajdukovic", "Brandon Nakashima", "Jaime Faria",
-            "D. Jorda Sanchis", "Dominik Koepfer", "Pablo Llamas Ruiz"
+            "D. Jorda Sanchis", "Dominik Koepfer", "Pablo Llamas Ruiz", " Carlos Alcaraz", " Daniil Medvedev"
     };
     private final Player[] players = new Player[playersNames.length];
     private final MatchDao matchDao = MatchDao.getInstance();
