@@ -9,6 +9,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.HibernateError;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -35,8 +36,9 @@ public class MatchDao implements Dao<Match> {
             session.beginTransaction();
             match = session.get(Match.class, uuid);
             session.getTransaction().commit();
-        } catch (HibernateError e) {
-            System.out.println("This match doesn't exist");
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            throw new HibernateException("There is no much with this UUID", e);
         }
         return Optional.ofNullable(match);
     }
@@ -47,11 +49,16 @@ public class MatchDao implements Dao<Match> {
                     "WHERE p1.name = :name OR p2.name = :name";
             Query query = session.createQuery(hql, Match.class);
             query.setParameter("name", playerName);
-            return query.getResultList();
-        } catch (HibernateError e) {
+            List<Match> matches = query.getResultList();
+
+            if (matches.isEmpty()) {
+                throw new HibernateException("No matches found for player: " + playerName);
+            }
+            return matches;
+
+        } catch (HibernateException e) {
             e.printStackTrace();
-            System.out.println("Error message: " + e.getMessage()); //TODO
-            return null;
+            throw new HibernateException(playerName + " hasn't played any game yet", e);
         }
     }
 
@@ -60,10 +67,9 @@ public class MatchDao implements Dao<Match> {
             String hql = "FROM Match WHERE winner IS NOT NULL";
             Query query = session.createQuery(hql, Match.class);
             return query.getResultList();
-        } catch (HibernateError e) {
+        } catch (HibernateException e) {
             e.printStackTrace();
-            //TODO
-            return null;
+            throw new HibernateException("There are no past matches", e);
         }
     }
 
@@ -73,8 +79,9 @@ public class MatchDao implements Dao<Match> {
             session.beginTransaction();
             session.persist(match);
             session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println("createNewMatch Failed");
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            throw new HibernateException("Couldn't create match");
         }
     }
 }

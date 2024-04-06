@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -25,17 +26,22 @@ public class NewMatchServlet extends HttpServlet {
         String player2Name = request.getParameter("player2Name");
 
 
-        Player player1 = playersService.createPlayer(player1Name);
-        Player player2 = playersService.createPlayer(player2Name);
+        try {
+            Player player1 = playersService.createPlayer(player1Name);
+            Player player2 = playersService.createPlayer(player2Name);
 
-        UUID uuid = UUID.randomUUID();
+            UUID uuid = UUID.randomUUID();
 
+            currentMatchService.startNewMatch(player1, player2, uuid);
+            MatchManager matchManager = MatchManager.getInstance(uuid);
+            matchManager.initNewMatch();
 
-        currentMatchService.startNewMatch(player1, player2, uuid);
-        MatchManager matchManager = MatchManager.getInstance(uuid);
-        matchManager.initNewMatch();
+            request.getSession().setAttribute(uuid.toString(), matchManager);
+            response.sendRedirect("match-score?matchId=" + uuid);
+        } catch (HibernateException e) {
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
 
-        request.getSession().setAttribute(uuid.toString(), matchManager);
-        response.sendRedirect("match-score?matchId=" + uuid);
     }
 }

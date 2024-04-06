@@ -3,6 +3,7 @@ import com.tennisscoreboard.DatabaseHandler;
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
 import org.hibernate.HibernateError;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -21,26 +22,15 @@ public class PlayerDao implements Dao<Player> {
         return playerDao;
     }
 
-    public Optional<Player> getById(Long id) {
-        Player player = null;
-        try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            player = session.get(Player.class, id);
-            session.getTransaction().commit();
-        } catch (HibernateError e) {
-            System.out.println("This player doesn't exist");
-        }
-        return Optional.ofNullable(player);
-    }
-
     public Optional<Player> getPlayerByName(String playerName) {
         Player player = null;
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
             session.beginTransaction();
             player = session.get(Player.class, playerName);
             session.getTransaction().commit();
-        } catch (HibernateError e) {
-            System.out.println("This player doesn't exist");
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            throw new HibernateException(playerName + " doesn't exist");
         }
         return Optional.ofNullable(player);
     }
@@ -51,8 +41,9 @@ public class PlayerDao implements Dao<Player> {
             session.beginTransaction();
             session.persist(player);
             session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println("Can't create player");
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            throw new HibernateException("An error happened during the player creation");
         }
     }
 }

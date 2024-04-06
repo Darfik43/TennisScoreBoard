@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -34,8 +35,9 @@ public class IncreaseScoreServlet extends HttpServlet {
                     response.sendRedirect("match-score?matchId=" + uuid);
                 }
                 return;
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
+            } catch (HibernateException e) {
+                request.setAttribute("errorMessage", e.getMessage());
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }
         response.sendRedirect(request.getContextPath() + "/error.jsp");
