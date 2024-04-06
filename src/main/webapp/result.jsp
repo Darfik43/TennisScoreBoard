@@ -10,6 +10,8 @@
   <title>Tennis Match Result</title>
 </head>
 <body>
+
+<a href="${pageContext.request.contextPath}/pastMatches">Scoreboard</a>
 <h1>Tennis Match Result</h1>
 
 <h2>Match Details</h2>
