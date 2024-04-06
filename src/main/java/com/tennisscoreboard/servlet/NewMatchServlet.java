@@ -27,6 +27,7 @@ public class NewMatchServlet extends HttpServlet {
 
         Player player1 = playersService.createPlayer(player1Name);
         Player player2 = playersService.createPlayer(player2Name);
+
         UUID uuid = UUID.randomUUID();
 
 

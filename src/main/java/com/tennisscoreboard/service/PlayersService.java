@@ -2,10 +2,14 @@ package com.tennisscoreboard.service;
 
 import com.tennisscoreboard.model.Player;
 import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
+import com.tennisscoreboard.service.dao.PlayerDao;
+
+import java.util.Optional;
 
 public class PlayersService {
 
     private static PlayersService playersService;
+    private static final PlayerDao playerDao = PlayerDao.getInstance();
 
     public static PlayersService getInstance() {
         if (playersService == null) {
@@ -16,8 +20,12 @@ public class PlayersService {
         }
 
     public Player createPlayer(String playerName) {
-        Player player = new Player();
-        player.setName(playerName);
-        return player;
+        Optional<Player> player = playerDao.getPlayerByName(playerName);
+
+        return player.orElseGet(() -> {
+            Player newPlayer = new Player();
+            newPlayer.setName(playerName);
+            return newPlayer;
+        });
     }
 }

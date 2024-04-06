@@ -2,11 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>Error</title>
 </head>
 <body>
-<h1>Error</h1>
-<p>An error occurred. Please try again later.</p>
+<h1>An error occurred:</h1>
+<p>${errorMessage}</p>
 </body>
 </html>

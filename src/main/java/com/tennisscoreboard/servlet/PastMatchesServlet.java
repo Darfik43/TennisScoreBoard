@@ -41,5 +41,6 @@ public class PastMatchesServlet extends HttpServlet {
         request.setAttribute("currentPageMatches", currentPageMatches);
         request.getRequestDispatcher("pastMatches.jsp").forward(request, response);
 
+        System.out.println(pastMatches);
     }
 }
