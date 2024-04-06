@@ -20,12 +20,8 @@ public class PlayersService {
         }
 
     public Player createPlayer(String playerName) {
-        Optional<Player> player = playerDao.getPlayerByName(playerName);
-
-        return player.orElseGet(() -> {
             Player newPlayer = new Player();
             newPlayer.setName(playerName);
             return newPlayer;
-        });
     }
 }

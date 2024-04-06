@@ -26,7 +26,9 @@ public class PlayerDao implements Dao<Player> {
         Player player = null;
         try (Session session = DatabaseHandler.getSessionFactory().openSession()) {
             session.beginTransaction();
-            player = session.get(Player.class, playerName);
+            Query<Player> query = session.createQuery("FROM Player WHERE name = :name", Player.class);
+            query.setParameter("name", playerName);
+            player = query.uniqueResult();
             session.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
