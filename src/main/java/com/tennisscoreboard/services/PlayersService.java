@@ -1,7 +1,6 @@
 package com.tennisscoreboard.services;
 
 import com.tennisscoreboard.model.Player;
-import com.tennisscoreboard.services.DAOs.PlayerDao;
 
 public class PlayersService {
 
