@@ -15,9 +15,6 @@ import java.util.UUID;
 @WebServlet("/match-score")
 public class MatchScoreServlet extends HttpServlet {
 
-    private final CurrentMatchServiceImpl currentMatchService = CurrentMatchServiceImpl.getInstance();
-
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UUID uuid = UUID.fromString(req.getParameter("matchId"));

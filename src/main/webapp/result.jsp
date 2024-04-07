@@ -8,10 +8,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Tennis Match Result</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
-<a href="${pageContext.request.contextPath}/pastMatches">Scoreboard</a>
+<p> <a href="${pageContext.request.contextPath}/pastMatches" class= "button">Scoreboard</a> </p>
 <h1>Tennis Match Result</h1>
 
 <h2>Match Details</h2>

@@ -7,17 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tennis Match Score</title>
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <h1>Tennis Match Score</h1>
@@ -57,14 +47,15 @@
     </tr>
 </table>
 
-<form action="increaseScore?matchId=<%= matchId %>" method="post">
+
+ <form action="increaseScore?matchId=<%= matchId %>" method="post">
     <input type="hidden" name="matchId" value="<%= request.getParameter("matchId") %>">
-    <button type="submit" name="action" value="player1">Player 1 Won</button>
+   <p> <button type="submit" name="action" value="player1">Player 1 Won</button> </p>
 </form>
 
 <form action="increaseScore?matchId=<%= matchId %>" method="post">
     <input type="hidden" name="matchId" value="<%= request.getParameter("matchId") %>">
-    <button type="submit" name="action" value="player2">Player 2 Won</button>
+   <p> <button type="submit" name="action" value="player2">Player 2 Won</button> </p>
 </form>
 
 </body>

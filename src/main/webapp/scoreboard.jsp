@@ -12,6 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tennis Scoreboard</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 

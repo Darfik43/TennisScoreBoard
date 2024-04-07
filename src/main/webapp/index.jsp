@@ -5,14 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Tennis Scoreboard</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
 <h1>Welcome to Tennis Scoreboard</h1>
 
-<a href="new-match.jsp">Create Match</a>
+<a href="new-match.jsp" class = "button">Create Match</a>
 <br>
-<a href="${pageContext.request.contextPath}/pastMatches">Scoreboard</a>
+<a href="${pageContext.request.contextPath}/pastMatches" class = "button">Scoreboard</a>
 
 </body>
 </html>

@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Tennis Match</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
@@ -17,7 +18,7 @@
     <label for="player2Name">Player 2 Name:</label>
     <input type="text" id="player2Name" name="player2Name" required>
     <br>
-    <input type="submit" value="Start Match">
+    <input type="submit" value="Start Match" class="button">
 </form>
 
 

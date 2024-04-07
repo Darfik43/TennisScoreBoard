@@ -6,14 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Прошедшие матчи</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <h1>Прошедшие матчи</h1>
 <form action="pastMatches" method="get">
     <label>
-        <input type="text" name="playerName" placeholder="Введите имя игрока">
+        <input type="text" name="playerName" placeholder="Введите имя игрока" >
     </label>
-    <input type="submit" value="Поиск">
+    <input type="submit" value="Поиск" class="button">
 </form>
 <table>
     <tr>
@@ -38,11 +39,11 @@
 
     <% int currentPage =  (Integer) (request.getAttribute("page")); %>
     <% if (currentPage > 1) { %>
-    <a href="?page=<%= currentPage - 1 %>">Предыдущая страница</a>
+    <p><a href="?page=<%= currentPage - 1 %>" class="button">Предыдущая страница</a> </p>
     <% } %>
 
     <% if (currentPage < (Integer) (request.getAttribute("totalPages"))) { %>
-    <a href="?page=<%= currentPage + 1 %>">Следующая страница</a>
+    <a href="?page=<%= currentPage + 1 %>" class="button">Следующая страница</a>
     <% } %>
 </table>
 </body>
