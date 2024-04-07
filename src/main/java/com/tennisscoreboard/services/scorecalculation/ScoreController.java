@@ -40,18 +40,6 @@ public class ScoreController implements ScoreCounter {
         return matchScore;
     }
 
-    public Map<String, Integer> getSetScore() {
-        return setScore.getScore();
-    }
-
-    public Map<String, TennisPoint> getGameScore() {
-        return gameScore.getGameScore();
-    }
-
-    public Map<String, Integer> getTieBreakScore() {
-        return tieBreakScore.getTieBreakScore();
-    }
-
     public Integer getPlayerTieBreakScore(String playerName) {
         return tieBreakScore.getPlayerTieBreakScore(playerName);
     }

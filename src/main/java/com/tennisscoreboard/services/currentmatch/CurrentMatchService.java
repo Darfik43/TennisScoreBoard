@@ -11,7 +11,5 @@ public interface CurrentMatchService {
 
     void endMatch(UUID matchId);
 
-    List<Match> getAllCurrentMatches();
-
     void saveFinishedMatch(Match match);
 }

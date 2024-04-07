@@ -6,7 +6,6 @@ import com.tennisscoreboard.services.DAOs.PlayerDao;
 public class PlayersService {
 
     private static PlayersService playersService;
-    private static final PlayerDao playerDao = PlayerDao.getInstance();
 
     public static PlayersService getInstance() {
         if (playersService == null) {

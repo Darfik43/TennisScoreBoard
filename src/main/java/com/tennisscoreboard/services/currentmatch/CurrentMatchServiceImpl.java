@@ -38,11 +38,6 @@ public class CurrentMatchServiceImpl implements CurrentMatchService {
         currentMatches.remove(matchId);
     }
 
-    @Override
-    public List<Match> getAllCurrentMatches() {
-        return new ArrayList<>(currentMatches.values());
-    }
-
     public Match getCurrentMatch(UUID uuid) {
         return currentMatches.get(uuid);
     }
