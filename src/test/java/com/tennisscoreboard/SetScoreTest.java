@@ -1,6 +1,6 @@
 package com.tennisscoreboard;
 
-import com.tennisscoreboard.service.scorecalculation.SetScore;
+import com.tennisscoreboard.services.scorecalculation.SetScore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

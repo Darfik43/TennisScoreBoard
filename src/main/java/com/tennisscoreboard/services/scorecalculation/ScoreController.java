@@ -1,4 +1,4 @@
-package com.tennisscoreboard.service.scorecalculation;
+package com.tennisscoreboard.services.scorecalculation;
 
 import java.util.HashMap;
 import java.util.Map;

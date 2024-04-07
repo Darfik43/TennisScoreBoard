@@ -1,7 +1,6 @@
-package com.tennisscoreboard.servlet;
+package com.tennisscoreboard.controllers;
 
-import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
-import com.tennisscoreboard.service.scorecalculation.MatchManager;
+import com.tennisscoreboard.services.scorecalculation.MatchManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

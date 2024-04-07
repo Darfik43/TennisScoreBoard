@@ -1,10 +1,7 @@
-package com.tennisscoreboard.service;
+package com.tennisscoreboard.services;
 
 import com.tennisscoreboard.model.Player;
-import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
-import com.tennisscoreboard.service.dao.PlayerDao;
-
-import java.util.Optional;
+import com.tennisscoreboard.services.DAOs.PlayerDao;
 
 public class PlayersService {
 

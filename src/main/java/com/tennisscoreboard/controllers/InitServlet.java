@@ -1,6 +1,6 @@
-package com.tennisscoreboard.servlet;
+package com.tennisscoreboard.controllers;
 
-import com.tennisscoreboard.service.AppStartService;
+import com.tennisscoreboard.services.AppStartService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 

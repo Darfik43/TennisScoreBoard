@@ -1,7 +1,7 @@
 package com.tennisscoreboard;
 
-import com.tennisscoreboard.service.scorecalculation.GameScore;
-import com.tennisscoreboard.service.scorecalculation.TennisPoint;
+import com.tennisscoreboard.services.scorecalculation.GameScore;
+import com.tennisscoreboard.services.scorecalculation.TennisPoint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

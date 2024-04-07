@@ -1,9 +1,9 @@
-package com.tennisscoreboard.service;
+package com.tennisscoreboard.services;
 
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
-import com.tennisscoreboard.service.dao.MatchDao;
-import com.tennisscoreboard.service.dao.PlayerDao;
+import com.tennisscoreboard.services.DAOs.MatchDao;
+import com.tennisscoreboard.services.DAOs.PlayerDao;
 
 import java.util.UUID;
 

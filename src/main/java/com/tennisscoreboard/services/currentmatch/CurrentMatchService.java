@@ -1,4 +1,4 @@
-package com.tennisscoreboard.service.currentmatch;
+package com.tennisscoreboard.services.currentmatch;
 
 import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;

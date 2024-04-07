@@ -1,4 +1,4 @@
-package com.tennisscoreboard.service.scorecalculation;
+package com.tennisscoreboard.services.scorecalculation;
 
 public enum TennisPoint {
     LOVE(0),

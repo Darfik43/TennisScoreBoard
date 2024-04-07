@@ -1,11 +1,8 @@
-package com.tennisscoreboard.service.dao;
+package com.tennisscoreboard.services.DAOs;
 import com.tennisscoreboard.DatabaseHandler;
-import com.tennisscoreboard.model.Match;
 import com.tennisscoreboard.model.Player;
-import org.hibernate.HibernateError;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.Optional;

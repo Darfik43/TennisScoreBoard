@@ -1,10 +1,8 @@
-package com.tennisscoreboard.service.scorecalculation;
+package com.tennisscoreboard.services.scorecalculation;
 
-import com.tennisscoreboard.model.Match;
-import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
+import com.tennisscoreboard.services.currentmatch.CurrentMatchServiceImpl;
 import lombok.Getter;
 
-import java.util.Map;
 import java.util.UUID;
 
 public class MatchManager {

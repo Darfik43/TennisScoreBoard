@@ -1,19 +1,11 @@
-package com.tennisscoreboard.service.dao;
+package com.tennisscoreboard.services.DAOs;
 
 import com.tennisscoreboard.DatabaseHandler;
 import com.tennisscoreboard.model.Match;
-import com.tennisscoreboard.service.currentmatch.CurrentMatchServiceImpl;
 import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
-import org.hibernate.HibernateError;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

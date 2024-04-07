@@ -1,5 +1,5 @@
 <%@ page import="java.util.UUID" %>
-<%@ page import="com.tennisscoreboard.service.scorecalculation.MatchManager" %>
+<%@ page import="com.tennisscoreboard.services.scorecalculation.MatchManager" %>
 <%@ page import="com.tennisscoreboard.model.Match" %>
 <%@ page import="com.tennisscoreboard.model.Player" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

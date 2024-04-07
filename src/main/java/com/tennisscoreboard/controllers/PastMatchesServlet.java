@@ -1,7 +1,7 @@
-package com.tennisscoreboard.servlet;
+package com.tennisscoreboard.controllers;
 
 import com.tennisscoreboard.model.Match;
-import com.tennisscoreboard.service.dao.MatchDao;
+import com.tennisscoreboard.services.DAOs.MatchDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

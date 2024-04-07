@@ -1,6 +1,6 @@
 package com.tennisscoreboard;
 
-import com.tennisscoreboard.service.scorecalculation.TieBreakScore;
+import com.tennisscoreboard.services.scorecalculation.TieBreakScore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
