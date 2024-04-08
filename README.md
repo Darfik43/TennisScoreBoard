@@ -8,6 +8,7 @@ TennisScoreboard is a web application that provides tools for managing tennis ma
 
 ### Back-end:
 - Java Servlets
+- Maven
 - Hibernate ORM
 - H2 in-memory Database
 - Unit-testing (JUnit5)
