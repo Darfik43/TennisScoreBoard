@@ -16,7 +16,7 @@ import java.util.List;
 public class PastMatchesServlet extends HttpServlet {
     private final MatchDao matchDao = MatchDao.getInstance();
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Match> pastMatches;
         String playerName = request.getParameter("playerName");
 
