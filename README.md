@@ -7,7 +7,9 @@ TennisScoreboard is a web application that provides tools for managing tennis ma
 ## Technologies Used
 
 ### Back-end:
-- Java Servlets
+- Java 21
+- Apache Tomcat Server
+- Servlets
 - Maven
 - Hibernate ORM
 - H2 in-memory Database
@@ -17,7 +19,7 @@ TennisScoreboard is a web application that provides tools for managing tennis ma
 - HTML
 - CSS
 
-## Limitations
+## Limitations and Rules
 
 For simplicity, it is assumed that each match is played according to the following rules:
 - The match is played until two sets (best of 3).
@@ -26,11 +28,13 @@ For simplicity, it is assumed that each match is played according to the followi
 ## Installation and Running
 
 1. Clone the repository:
-git clone https://github.com/your_username/TennisScoreboard.git
-
-2. Import the project into your development environment.
-
-3. Run the project.
+git clone https://github.com/Darfik43/TennisScoreBoard
+2. Open Terminal
+3. cd [path-to-repository]/TennisScoreBoard
+4. docker build -t your_image_name .
+5. docker run -p 8080:8080 tennis
+6. Open browser and go localhost:8080/tennis
+   
 
 
 ## Authors
